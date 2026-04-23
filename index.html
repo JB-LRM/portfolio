@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio BTS SIO SISR — Jolan BOCH, étudiant à ECORIS Chambéry">
+  <title>BOCH Jolan — Portfolio BTS SIO SISR</title>
+  <link rel="icon" type="image/png"
+    href="assets/img/J B.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --pu: #7c3aed;
+      --pd: #6d28d9;
+      --pl: #8b5cf6;
+      --pxl: rgba(124, 58, 237, .15);
+      --dk: #0d0d1a;
+      --dk2: #13132a;
+      --gr: #7a7f8e;
+      --lt: #181830;
+      --wh: #1e1e38;
+      --bd: rgba(255, 255, 255, .07);
+      --bdhov: rgba(124, 58, 237, .35);
+      --tx: #d8d8f0;
+      --txm: #8a8faa;
+      --r: 12px;
+      --t: .3s ease
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--tx);
+      background: var(--dk);
+      overflow-x: hidden
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Syne', sans-serif;
+      color: #eeeeff
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--t)
+    }
+
+    img {
+      display: block;
+      max-width: 100%
+    }
+
+    /* NAVBAR */
+    #nb {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: all var(--t)
+    }
+
+    #nb.sc {
+      background: rgba(10, 10, 22, .96);
+      backdrop-filter: blur(16px);
+      padding: 12px 0;
+      box-shadow: 0 2px 40px rgba(124, 58, 237, .15)
+    }
+
+    .nlogo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #fff;
+      letter-spacing: -.5px
+    }
+
+    .nlogo span {
+      color: var(--pl)
+    }
+
+    .nl {
+      color: rgba(255, 255, 255, .65) !important;
+      font-size: .88rem;
+      padding: 7px 15px !important;
+      border-radius: 7px;
+      transition: all var(--t)
+    }
+
+    .nl:hover,
+    .nl.ac {
+      color: #fff !important;
+      background: rgba(124, 58, 237, .18)
+    }
+
+    .ncta {
+      background: var(--pu) !important;
+      color: #fff !important;
+      border-radius: 7px;
+      padding: 8px 20px !important;
+      font-weight: 500
+    }
+
+    .ncta:hover {
+      background: var(--pd) !important
+    }
+
+    #mnav {
+      display: none;
+      background: rgba(10, 10, 22, .98);
+      padding: 12px 8px 16px;
+      margin-top: 8px;
+      border-radius: var(--r);
+      border: 1px solid rgba(124, 58, 237, .2)
+    }
+
+    .ml {
+      display: block;
+      color: rgba(255, 255, 255, .7) !important;
+      padding: 10px 14px;
+      font-size: .9rem;
+      border-radius: 7px;
+      transition: all var(--t)
+    }
+
+    .ml:hover {
+      color: #fff !important;
+      background: rgba(124, 58, 237, .18)
+    }
+
+    .ntog {
+      border: 1px solid rgba(255, 255, 255, .25);
+      padding: 6px 10px;
+      background: none;
+      cursor: pointer
+    }
+
+    .ni {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: rgba(255, 255, 255, .8);
+      margin: 4px 0
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(155deg, var(--dk) 0%, var(--dk2) 45%, #1a0a35 100%);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative
+    }
+
+    .hgrid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: linear-gradient(rgba(124, 58, 237, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, .06) 1px, transparent 1px);
+      background-size: 60px 60px
+    }
+
+    .hblob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .18
+    }
+
+    .hb1 {
+      width: 700px;
+      height: 700px;
+      background: var(--pu);
+      top: -250px;
+      right: -200px
+    }
+
+    .hb2 {
+      width: 450px;
+      height: 450px;
+      background: #267df4;
+      bottom: -150px;
+      left: -150px
+    }
+
+    .hi {
+      position: relative;
+      z-index: 1
+    }
+
+    .hbadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 58, 237, .15);
+      border: 1px solid rgba(124, 58, 237, .35);
+      color: var(--pl);
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px
+    }
+
+    .bdot {
+      width: 7px;
+      height: 7px;
+      background: var(--pl);
+      border-radius: 50%;
+      animation: blink 2s infinite
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.5)
+      }
+    }
+
+    .ht {
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 20px
+    }
+
+    .ht .ac {
+      color: var(--pl)
+    }
+
+    .hd {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, .5);
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.75;
+      margin-bottom: 38px
+    }
+
+    .hd strong {
+      color: rgba(255, 255, 255, .85);
+      font-weight: 500
+    }
+
+    .hbtns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .bp {
+      background: var(--pu);
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 9px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all var(--t)
+    }
+
+    .bp:hover {
+      background: var(--pd);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(124, 58, 237, .4)
+    }
+
+    .bo {
+      background: transparent;
+      color: rgba(255, 255, 255, .7);
+      border: 1px solid rgba(255, 255, 255, .2);
+      padding: 14px 30px;
+      border-radius: 9px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all var(--t)
+    }
+
+    .bo:hover {
+      border-color: rgba(255, 255, 255, .5);
+      color: #fff;
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .hstats {
+      margin-top: 56px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap
+    }
+
+    .hsn {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #fff
+    }
+
+    .hsn span {
+      color: var(--pl)
+    }
+
+    .hsl {
+      font-size: .72rem;
+      color: rgba(255, 255, 255, .35);
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    .aring {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(124, 58, 237, .18), rgba(124, 58, 237, .05));
+      border: 1px solid rgba(124, 58, 237, .22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative
+    }
+
+    .aring::before {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      border: 1px dashed rgba(124, 58, 237, .3);
+      animation: spin 22s linear infinite
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .ainn {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1e1e35, #2a1a4e);
+      border: 4px solid var(--pu);
+      box-shadow: 0 0 50px rgba(124, 58, 237, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--pl);
+      z-index: 1;
+      overflow: hidden
+    }
+
+    .ainn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%
+    }
+
+    .hscroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: rgba(255, 255, 255, .3);
+      font-size: .68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase
+    }
+
+    .hscroll i {
+      animation: bounce 2s infinite
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(7px)
+      }
+    }
+
+    /* SECTIONS */
+    .sec {
+      padding: 90px 0
+    }
+
+    .sec-alt {
+      background: var(--lt)
+    }
+
+    .sec-dark {
+      background: #0a0a14
+    }
+
+    .slb {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--pl);
+      background: rgba(124, 58, 237, .18);
+      border: 1px solid rgba(124, 58, 237, .25);
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 12px
+    }
+
+    .sti {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      color: #eeeeff
+    }
+
+    .sbar {
+      width: 44px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pu), transparent);
+      border-radius: 2px;
+      margin: 14px 0 38px
+    }
+
+    .sbar.cx {
+      margin: 14px auto 38px
+    }
+
+    .ssub {
+      font-size: .93rem;
+      color: var(--txm);
+      line-height: 1.75;
+      max-width: 520px
+    }
+
+    /* ANIMATIONS */
+    .fu {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease
+    }
+
+    .fu.in {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .d1 {
+      transition-delay: .1s
+    }
+
+    .d2 {
+      transition-delay: .2s
+    }
+
+    .d3 {
+      transition-delay: .3s
+    }
+
+    .d4 {
+      transition-delay: .4s
+    }
+
+    /* À PROPOS CARDS */
+    .icard {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      padding: 22px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: box-shadow var(--t), transform var(--t)
+    }
+
+    .icard:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .3);
+      border-color: var(--bdhov);
+      transform: translateY(-3px)
+    }
+
+    .iico {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      border-radius: 10px;
+      background: rgba(124, 58, 237, .18);
+      border: 1px solid rgba(124, 58, 237, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pl);
+      font-size: 1rem
+    }
+
+    .icard h5 {
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 3px;
+      color: #eeeeff
+    }
+
+    .icard p {
+      font-size: .82rem;
+      color: var(--txm);
+      line-height: 1.5;
+      margin: 0
+    }
+
+    /* TIMELINE */
+    .tl {
+      position: relative;
+      padding: 10px 0
+    }
+
+    .tl::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--pu) 20%, var(--pu) 80%, transparent)
+    }
+
+    .tli {
+      position: relative;
+      width: 50%;
+      padding: 0 52px 36px 0
+    }
+
+    .tli.r {
+      left: 50%;
+      padding: 0 0 36px 52px
+    }
+
+    .tldot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      background: var(--pu);
+      border: 3px solid var(--wh);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, .3);
+      top: 10px
+    }
+
+    .tli:not(.r) .tldot {
+      right: -6.5px
+    }
+
+    .tli.r .tldot {
+      left: -6.5px
+    }
+
+    .tlc {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      padding: 22px 24px;
+      transition: box-shadow var(--t), transform var(--t)
+    }
+
+    .tlc:hover {
+      box-shadow: 0 6px 25px rgba(0, 0, 0, .25);
+      border-color: var(--bdhov);
+      transform: translateY(-2px)
+    }
+
+    .tltag {
+      display: inline-block;
+      background: rgba(124, 58, 237, .18);
+      color: var(--pl);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 10px
+    }
+
+    .tlc h3 {
+      font-size: .97rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #eeeeff
+    }
+
+    .tlc p {
+      font-size: .83rem;
+      color: var(--txm);
+      margin: 0
+    }
+
+    /* COMPÉTENCES */
+    .scat {
+      margin-bottom: 30px
+    }
+
+    .scattt {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--txm);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--bd);
+      margin-bottom: 16px
+    }
+
+    .stags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px
+    }
+
+    .stag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: .83rem;
+      font-weight: 500;
+      color: var(--tx);
+      cursor: default;
+      transition: all var(--t)
+    }
+
+    .stag:hover {
+      border-color: var(--bdhov);
+      background: rgba(124, 58, 237, .12);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(124, 58, 237, .15)
+    }
+
+    .stag i {
+      color: var(--pl);
+      font-size: .85rem
+    }
+
+    .slv {
+      font-size: .66rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    .lg {
+      background: rgba(124, 58, 237, .2);
+      color: var(--pl)
+    }
+
+    .lm {
+      background: rgba(38, 125, 244, .15);
+      color: #6aa3f8
+    }
+
+    .ll {
+      background: rgba(255, 255, 255, .08);
+      color: var(--txm)
+    }
+
+    /* VEILLE */
+    .vtabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px
+    }
+
+    .vtab {
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-size: .82rem;
+      font-weight: 500;
+      border: 1px solid var(--bd);
+      background: var(--wh);
+      color: var(--txm);
+      cursor: pointer;
+      transition: all var(--t)
+    }
+
+    .vtab.on,
+    .vtab:hover {
+      background: var(--pu);
+      border-color: var(--pu);
+      color: #fff
+    }
+
+    .vgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 18px
+    }
+
+    .acard {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--t);
+      position: relative;
+      overflow: hidden
+    }
+
+    .acard::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--pu);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--t)
+    }
+
+    .acard:hover::before {
+      transform: scaleX(1)
+    }
+
+    .acard:hover {
+      box-shadow: 0 10px 35px rgba(0, 0, 0, .3);
+      border-color: var(--bdhov);
+      transform: translateY(-3px)
+    }
+
+    .ahead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .sbadge {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      white-space: nowrap
+    }
+
+    .sc-certfr {
+      background: rgba(124, 58, 237, .2);
+      color: var(--pl)
+    }
+
+    .sc-anssi {
+      background: rgba(38, 125, 244, .15);
+      color: #6aa3f8
+    }
+
+    .sc-def {
+      background: rgba(255, 255, 255, .08);
+      color: var(--txm)
+    }
+
+    .adate {
+      font-size: .72rem;
+      color: var(--txm);
+      white-space: nowrap
+    }
+
+    .acard h4 {
+      font-size: .88rem;
+      font-weight: 700;
+      color: #eeeeff;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      flex: 1
+    }
+
+    .acard p {
+      font-size: .81rem;
+      color: var(--txm);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 14px
+    }
+
+    .alink {
+      font-size: .79rem;
+      color: var(--pl);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      transition: gap var(--t), color var(--t)
+    }
+
+    .alink:hover {
+      gap: 10px;
+      color: #a78bfa
+    }
+
+    .vstatus {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      color: var(--txm);
+      margin-bottom: 16px
+    }
+
+    .vsdot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: blink 2s infinite
+    }
+
+    .vsdot.ld {
+      background: #f59e0b
+    }
+
+    .vsdot.er {
+      background: #ef4444;
+      animation: none
+    }
+
+    #vload {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--txm);
+      font-size: .9rem
+    }
+
+    #vload i {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: var(--pl);
+      animation: spini 1s linear infinite;
+      display: block
+    }
+
+    @keyframes spini {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    #verr {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--txm)
+    }
+
+    /* PROJETS */
+    .pcard {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--t)
+    }
+
+    .pcard:hover {
+      box-shadow: 0 14px 45px rgba(0, 0, 0, .3);
+      transform: translateY(-5px);
+      border-color: var(--bdhov)
+    }
+
+    .pthumb {
+      height: 195px;
+      background: linear-gradient(135deg, #0d0d1a, #2d1b69);
+      overflow: hidden;
+      position: relative
+    }
+
+    .pthumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease
+    }
+
+    .pcard:hover .pthumb img {
+      transform: scale(1.06)
+    }
+
+    .pph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: rgba(124, 58, 237, .35)
+    }
+
+    .pbdg {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: .68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 4px 11px;
+      border-radius: 50px;
+      color: #fff
+    }
+
+    .bpu {
+      background: var(--pu)
+    }
+
+    .bps {
+      background: #267df4
+    }
+
+    .bpp {
+      background: #f59e0b
+    }
+
+    .pbdy {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column
+    }
+
+    .pbdy h4 {
+      font-size: .97rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #eeeeff
+    }
+
+    .pbdy p {
+      font-size: .83rem;
+      color: var(--txm);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 16px
+    }
+
+    .ptechs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px
+    }
+
+    .pt {
+      font-size: .7rem;
+      padding: 3px 9px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--bd);
+      border-radius: 50px;
+      color: var(--txm);
+      font-weight: 500
+    }
+
+    .pbtns {
+      display: flex;
+      gap: 8px
+    }
+
+    .pb {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: .8rem;
+      font-weight: 500;
+      text-align: center;
+      transition: all var(--t);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none
+    }
+
+    .pbm {
+      background: var(--pu);
+      color: #fff
+    }
+
+    .pbm:hover {
+      background: var(--pd);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(124, 58, 237, .35)
+    }
+
+    .pbs {
+      background: rgba(255, 255, 255, .06);
+      color: var(--tx);
+      border: 1px solid var(--bd)
+    }
+
+    .pbs:hover {
+      background: rgba(255, 255, 255, .1)
+    }
+
+    /* ÉCOLE / ENTREPRISE */
+    .org-wrap {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, .2)
+    }
+
+    .org-visual {
+      background: linear-gradient(155deg, var(--dk) 0%, var(--dk2) 55%, #1a0a35 100%);
+      padding: 50px 40px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .org-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(124, 58, 237, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, .07) 1px, transparent 1px);
+      background-size: 40px 40px
+    }
+
+    .org-logo-wrap {
+      position: relative;
+      z-index: 1;
+      width: 110px;
+      height: 110px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2.8rem;
+      color: var(--pl)
+    }
+
+    .org-logo-wrap img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 10px
+    }
+
+    .org-visual h3 {
+      position: relative;
+      z-index: 1;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px
+    }
+
+    .org-visual p {
+      position: relative;
+      z-index: 1;
+      font-size: .83rem;
+      color: rgba(255, 255, 255, .45);
+      margin: 0;
+      line-height: 1.6
+    }
+
+    .org-visual .org-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--pl);
+      background: rgba(124, 58, 237, .15);
+      border: 1px solid rgba(124, 58, 237, .3);
+      padding: 7px 16px;
+      border-radius: 50px;
+      transition: all var(--t)
+    }
+
+    .org-visual .org-link:hover {
+      background: var(--pu);
+      border-color: var(--pu);
+      color: #fff
+    }
+
+    .org-info {
+      padding: 44px 40px
+    }
+
+    .org-info h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #eeeeff
+    }
+
+    .org-info .org-sub {
+      font-size: .85rem;
+      color: var(--txm);
+      margin-bottom: 28px;
+      line-height: 1.7
+    }
+
+    .org-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px
+    }
+
+    .od {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px
+    }
+
+    .od-ico {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 9px;
+      background: rgba(124, 58, 237, .18);
+      border: 1px solid rgba(124, 58, 237, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pl);
+      font-size: .82rem
+    }
+
+    .od-lbl {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--txm);
+      margin-bottom: 2px
+    }
+
+    .od-val {
+      font-size: .85rem;
+      font-weight: 500;
+      color: #eeeeff
+    }
+
+    .org-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .otag {
+      font-size: .75rem;
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--bd);
+      border-radius: 50px;
+      color: var(--txm);
+      font-weight: 500;
+      transition: all var(--t)
+    }
+
+    .otag:hover {
+      background: rgba(124, 58, 237, .18);
+      border-color: var(--bdhov);
+      color: var(--pl)
+    }
+
+    @media(max-width:767px) {
+      .org-visual {
+        padding: 36px 24px
+      }
+
+      .org-info {
+        padding: 32px 24px
+      }
+
+      .org-details {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .ctwrap {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, .25)
+    }
+
+    .cpl {
+      background: linear-gradient(155deg, var(--dk) 0%, var(--dk2) 60%, #1a0a35 100%);
+      padding: 50px 40px;
+      height: 100%;
+      display: flex;
+      flex-direction: column
+    }
+
+    .cpl h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px
+    }
+
+    .cpl .sub {
+      font-size: .86rem;
+      color: rgba(255, 255, 255, .45);
+      line-height: 1.75;
+      margin-bottom: 38px
+    }
+
+    .cdet {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px
+    }
+
+    .cdico {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 10px;
+      background: rgba(124, 58, 237, .15);
+      border: 1px solid rgba(124, 58, 237, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pl);
+      font-size: .88rem
+    }
+
+    .cdet .lb {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 2px
+    }
+
+    .cdet .vl {
+      font-size: .86rem;
+      color: rgba(255, 255, 255, .75);
+      font-weight: 500
+    }
+
+    .csoc {
+      margin-top: auto;
+      padding-top: 36px;
+      display: flex;
+      gap: 10px
+    }
+
+    .sb {
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .5);
+      font-size: .88rem;
+      transition: all var(--t)
+    }
+
+    .sb:hover {
+      background: var(--pu);
+      border-color: var(--pu);
+      color: #fff;
+      transform: translateY(-2px)
+    }
+
+    .cpr {
+      padding: 50px 42px;
+      background: var(--wh)
+    }
+
+    .cpr h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #eeeeff
+    }
+
+    .cpr .sub {
+      font-size: .85rem;
+      color: var(--txm);
+      margin-bottom: 28px
+    }
+
+    .flb {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--txm);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      display: block
+    }
+
+    .fin {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      color: var(--tx);
+      background: rgba(255, 255, 255, .04);
+      outline: none;
+      transition: border-color var(--t), box-shadow var(--t)
+    }
+
+    .fin:focus {
+      border-color: var(--pu);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, .15)
+    }
+
+    textarea.fin {
+      resize: vertical;
+      min-height: 120px
+    }
+
+    .bsnd {
+      width: 100%;
+      background: var(--pu);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 9px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .93rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: all var(--t)
+    }
+
+    .bsnd:hover {
+      background: var(--pd);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(124, 58, 237, .35)
+    }
+
+    /* FOOTER */
+    #ft {
+      background: var(--dk);
+      color: rgba(255, 255, 255, .45);
+      padding: 60px 0 28px
+    }
+
+    .ftl {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: #fff;
+      margin-bottom: 12px
+    }
+
+    .ftl span {
+      color: var(--pl)
+    }
+
+    #ft h5 {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 18px
+    }
+
+    .ftlks {
+      list-style: none;
+      padding: 0;
+      margin: 0
+    }
+
+    .ftlks li {
+      margin-bottom: 9px
+    }
+
+    .ftlks a {
+      color: rgba(255, 255, 255, .45);
+      font-size: .85rem;
+      transition: color var(--t)
+    }
+
+    .ftlks a:hover {
+      color: var(--pl)
+    }
+
+    .fthr {
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      margin: 38px 0 18px
+    }
+
+    .ftbot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .ftbot p {
+      font-size: .8rem;
+      margin: 0;
+      color: rgba(255, 255, 255, .25)
+    }
+
+    .ftbot .ac {
+      color: var(--pl)
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:767px) {
+      .tl::before {
+        left: 18px
+      }
+
+      .tli,
+      .tli.r {
+        width: 100%;
+        left: 0;
+        padding: 0 0 28px 44px
+      }
+
+      .tli .tldot,
+      .tli.r .tldot {
+        left: 11px;
+        right: auto
+      }
+
+      .aring {
+        width: 220px;
+        height: 220px
+      }
+
+      .ainn {
+        width: 160px;
+        height: 160px;
+        font-size: 2.5rem
+      }
+
+      .cpl,
+      .cpr {
+        padding: 32px 24px
+      }
+    }
+
+    @media(max-width:991px) {
+      .hicol {
+        margin-top: 50px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="nb">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="#hero" class="nlogo"><span>BOCH</span> Jolan</a>
+        <ul class="nav d-none d-md-flex align-items-center gap-1 mb-0">
+          <li><a href="#hero" class="nl ac">Accueil</a></li>
+          <li><a href="#parcours" class="nl">Parcours</a></li>
+          <li><a href="#ecole" class="nl">École</a></li>
+          <li><a href="#entreprise" class="nl">Entreprise</a></li>
+          <li><a href="#competences" class="nl">Compétences</a></li>
+          <li><a href="#projets" class="nl">Projets</a></li>
+          <li><a href="#veille" class="nl">Veille</a></li>
+          <li><a href="#contact" class="nl ncta">Contact</a></li>
+        </ul>
+        <button class="ntog d-md-none" id="ntog"><span class="ni"></span><span class="ni"></span><span
+            class="ni"></span></button>
+      </div>
+      <div id="mnav">
+        <a href="#hero" class="ml" onclick="cm()">Accueil</a>
+        <a href="#parcours" class="ml" onclick="cm()">Parcours</a>
+        <a href="#ecole" class="ml" onclick="cm()">École</a>
+        <a href="#entreprise" class="ml" onclick="cm()">Entreprise</a>
+        <a href="#competences" class="ml" onclick="cm()">Compétences</a>
+        <a href="#projets" class="ml" onclick="cm()">Projets</a>
+        <a href="#veille" class="ml" onclick="cm()">Veille</a>
+        <a href="#contact" class="ml" onclick="cm()">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hgrid"></div>
+    <div class="hblob hb1"></div>
+    <div class="hblob hb2"></div>S
+    <div class="container hi py-5">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="hbadge fu"><span class="bdot"></span>BTS SIO · Option SISR</div>
+          <h1 class="ht fu d1">Bonjour,</br> je suis<br><span class="ac">Jolan BOCH</span></h1>
+          <p class="hd fu d2">Étudiant en <strong>BTS SIO SISR</strong> à ECORIS Chambéry.<br>Passionné par les réseaux,
+            l'infrastructure et la cybersécurité.</p>
+          <div class="hbtns fu d3">
+            <a href="#projets" class="bp"><i class="fa fa-folder-open"></i>Mes projets</a>
+            <a href="pdfs/CV J.BOCH alternance.pdf" target="_blank" class="bo"><i class="fa fa-download"></i>Télécharger
+              CV</a>
+          </div>
+          <div class="hstats fu d4">
+            <div>
+              <div class="hsn">2<span>ans</span></div>
+              <div class="hsl">de formation</div>
+            </div>
+            <div>
+              <div class="hsn">4<span>+</span></div>
+              <div class="hsl">projets réalisés</div>
+            </div>
+            <div>
+              <div class="hsn">1 + 1</div>
+              <div class="hsl">stage + alternance</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 hicol">
+          <div class="aring fu d2">
+            <div class="ainn">
+              <img src="assets/img/Photo unité.png" alt="Jolan BOCH">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hscroll"><span>Défiler</span><i class="fa fa-chevron-down"></i></div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="apropos" class="sec">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5 fu">
+          <span class="slb">À propos</span>
+          <h2 class="sti">Qui suis-je ?</h2>
+          <div class="sbar"></div>
+          <p style="color:var(--txm);line-height:1.8;font-size:.93rem;margin-bottom:14px;">Passionné d'informatique, je
+            me suis orienté vers le BTS SIO option SISR pour me spécialiser dans les réseaux, les systèmes et la
+            cybersécurité.</p>
+          <p style="color:var(--txm);line-height:1.8;font-size:.93rem;margin-bottom:28px;">En 1ère année à <strong
+              style="color:#eeeeff">ECORIS Chambéry</strong>, j'ai effectué un stage chez <strong
+              style="color:#eeeeff">Synergie 73</strong> à Albertville où j'ai mis en pratique mes compétences réseau
+            sur le terrain.</p>
+          <a href="#contact" class="bp" style="display:inline-flex;">Me contacter <i class="fa fa-arrow-right"></i></a>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-3">
+            <div class="col-sm-6 fu d1">
+              <div class="icard">
+                <div class="iico"><i class="fa fa-graduation-cap"></i></div>
+                <div>
+                  <h5>Formation</h5>
+                  <p>BTS SIO SISR — ECORIS Chambéry<br>2024 – 2026</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 fu d2">
+              <div class="icard">
+                <div class="iico"><i class="fa fa-briefcase"></i></div>
+                <div>
+                  <h5>Stage</h5>
+                  <p>Synergie 73 — Albertville<br>2025 · 2 mois</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 fu d3">
+              <div class="icard">
+                <div class="iico"><i class="fa fa-map-marker-alt"></i></div>
+                <div>
+                  <h5>Localisation</h5>
+                  <p>Chambéry / Albertville<br>Savoie (73), France</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 fu d4">
+              <div class="icard">
+                <div class="iico"><i class="fa fa-shield-alt"></i></div>
+                <div>
+                  <h5>Option</h5>
+                  <p>SISR — Réseaux &amp; Systèmes<br>Infrastructure · Cybersécurité</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARCOURS -->
+  <section id="parcours" class="sec sec-alt">
+    <div class="container">
+      <div class="text-center fu"><span class="slb">Parcours</span>
+        <h2 class="sti">Scolaire &amp; Professionnel</h2>
+        <div class="sbar cx"></div>
+      </div>
+      <div class="tl">
+        <div class="tli fu">
+          <div class="tldot"></div>
+          <div class="tlc"><span class="tltag">BAC +0</span>
+            <h3>2020 – 2023 · BAC Général</h3>
+            <p>Lycée Jean-Moulin, Albertville<br>Spécialités Mathématiques / Physique-Chimie</p>
+          </div>
+        </div>
+        <div class="tli r fu d1">
+          <div class="tldot"></div>
+          <div class="tlc"><span class="tltag">BAC +1</span>
+            <h3>2023 – 2024 · BUT MT2E</h3>
+            <p>Orientation initiale dans le bâtiment<br>Réorientation vers l'informatique</p>
+          </div>
+        </div>
+        <div class="tli fu d2">
+          <div class="tldot"></div>
+          <div class="tlc"><span class="tltag">BAC +2</span>
+            <h3>2024 – 2026 · BTS SIO SISR</h3>
+            <p>ECORIS Chambéry<br>Solutions d'Infrastructure, Systèmes et Réseaux</p>
+          </div>
+        </div>
+        <div class="tli r fu d3">
+          <div class="tldot"></div>
+          <div class="tlc"><span class="tltag">Stage</span>
+            <h3>2025 · Stage en entreprise</h3>
+            <p>Synergie 73 — Albertville<br>2 mois · Intervention réseau terrain</p>
+          </div>
+        </div>
+        <div class="tli fu d4">
+          <div class="tldot"></div>
+          <div class="tlc"><span class="tltag" style="background:rgba(124,58,237,.25);color:var(--pu);">En cours</span>
+            <h3>2025 – 2026 · Alternance</h3>
+            <p>Groupe SI2A — Annecy<br>Missions : Support Informatique </em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCOLE -->
+  <section id="ecole" class="sec">
+    <div class="container">
+      <div class="text-center mb-5 fu">
+        <span class="slb">Mon école</span>
+        <h2 class="sti">ECORIS Chambéry</h2>
+        <div class="sbar cx"></div>
+      </div>
+      <div class="org-wrap fu d1">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <div class="org-visual">
+              <div class="org-logo-wrap">
+                <img src="assets/img/ecoris-logo.png" alt="ECORIS">
+
+              </div>
+              <h3>ECORIS</h3>
+              <p>Établissement d'enseignement supérieur créé en 1980, présent dans 8 villes en France.</p>
+              <a href="https://ecoris.com" target="_blank" class="org-link"><i class="fa fa-globe"></i>ecoris.com</a>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="org-info">
+              <h3>Présentation de l'école</h3>
+              <p class="org-sub">ECORIS est une école qui cherche à se rapprocher au maximum du monde professionnel.
+                Elle met l'accent sur la professionnalisation, l'accompagnement individuel, la mise en pratique et la
+                relation entreprise / étudiant.</p>
+              <div class="org-details">
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-map-marker-alt"></i></div>
+                  <div>
+                    <div class="od-lbl">Campus</div>
+                    <div class="od-val">574 Rue de Chantabord<br>73000 Chambéry</div>
+                  </div>
+                </div>
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-phone"></i></div>
+                  <div>
+                    <div class="od-lbl">Téléphone</div>
+                    <div class="od-val">04 79 69 28 17</div>
+                  </div>
+                </div>
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-user-tie"></i></div>
+                  <div>
+                    <div class="od-lbl">Directeur</div>
+                    <div class="od-val">Nicolas ROCHE</div>
+                  </div>
+                </div>
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-calendar"></i></div>
+                  <div>
+                    <div class="od-lbl">Fondée en</div>
+                    <div class="od-val">1980 · 8 villes</div>
+                  </div>
+                </div>
+              </div>
+              <div class="org-tags">
+                <span class="otag">BTS SIO SISR</span>
+
+                <span class="otag">Bachelor</span>
+                <span class="otag">Master</span>
+                <span class="otag">Alternance</span>
+                <span class="otag">Enseignement supérieur</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTREPRISE -->
+  <section id="entreprise" class="sec sec-alt">
+    <div class="container">
+      <div class="text-center mb-5 fu">
+        <span class="slb">Mon entreprise</span>
+        <h2 class="sti">Entreprise d'alternance</h2>
+        <div class="sbar cx"></div>
+      </div>
+      <div class="org-wrap fu d1">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <div class="org-visual">
+              <div class="org-logo-wrap">
+                <img src="assets/img/groupesi2a_logo.jpg" alt="Entreprise">
+
+              </div>
+              <h3>Groupe SI2A<em style="color:rgba(255,255,255,.5);font-style:normal"></em></h3>
+              <p>Entreprise crée en 2012, présente en Savoie/Haute-savoie, Ain, ...</p>
+              <a href="https://www.groupe-si2a.com/formations-projets-services-informatiques-annecy-chambery-grenoble/"
+                target="_blank" class="org-link"><i class="fa fa-globe"></i>groupe-si2a.com</a>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="org-info">
+              <h3>Présentation de l'entreprise</h3>
+              <p class="org-sub">
+                Le Groupe SI2A est une ESN (Entreprise de Service du Numérique), le Groupe se décline en deux grands pôles, SI2A Services Numériques et SI2A Consulting.<em
+                  style="color:var(--gr)">
+                  </em></p>
+              <div class="org-details">
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-map-marker-alt"></i></div>
+                  <div>
+                    <div class="od-lbl">Adresse</div>
+                    <div class="od-val">21 Rte de Nanfray, 74960 Annecy</em></div>
+                  </div>
+                </div>
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-phone"></i></div>
+                  <div>
+                    <div class="od-lbl">Téléphone</div>
+                    <div class="od-val">04 50 69 24 77</em></div>
+                  </div>
+                </div>
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-user-tie"></i></div>
+                  <div>
+                    <div class="od-lbl">Responsables</div>
+                    <div class="od-val">Nicolas Campart, Ela Bojarun </em></div>
+                  </div>
+                </div>
+                <div class="od">
+                  <div class="od-ico"><i class="fa fa-briefcase"></i></div>
+                  <div>
+                    <div class="od-lbl">Contrat</div>
+                    <div class="od-val">Alternance 2025 – 2026</div>
+                  </div>
+                </div>
+              </div>
+              <div class="org-tags">
+                <span class="otag">Apprentissage</span>
+                <span class="otag">Informatique</span>
+                <span class="otag">Support</span>
+                <span class="otag">Formations</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section id="competences" class="sec">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 fu">
+          <span class="slb">Compétences</span>
+          <h2 class="sti">Outils &amp; technologies</h2>
+          <div class="sbar"></div>
+          <p class="ssub">Acquises en Cours, en Entreprise et en Autonomie — les technologies que je maîtrise ou que
+            j'apprends activement.</p>
+          <a href="pdfs/Tableau de Synthèse BTS SIO 2.pdf" target="_blank" class="bp"
+            style="display:inline-flex;margin-top:28px;font-size:.85rem;padding:12px 22px;">
+            <i class="fa fa-table"></i> Tableau de synthèse
+          </a>
+        </div>
+        <div class="col-lg-8 fu d1">
+          <div class="scat">
+            <div class="scattt"><i class="fa fa-network-wired me-2"></i>Réseaux &amp; Infrastructure</div>
+            <div class="stags">
+              <span class="stag"><i class="fa fa-network-wired"></i>Cisco Packet Tracer<span
+                  class="slv lg">bon</span></span>
+              <span class="stag"><i class="fa fa-server"></i>Windows Server<span class="slv lg">bon</span></span>
+              <span class="stag"><i class="fab fa-linux"></i>Linux Debian<span class="slv lm">moyen</span></span>
+              <span class="stag"><i class="fa fa-shield-alt"></i>Pare-feu<span class="slv lm">moyen</span></span>
+              <span class="stag"><i class="fa fa-desktop"></i>Active Directory<span class="slv lg">bon</span></span>
+            </div>
+          </div>
+          <div class="scat">
+            <div class="scattt"><i class="fa fa-code me-2"></i>Développement Web</div>
+            <div class="stags">
+              <span class="stag"><i class="fab fa-html5"></i>HTML5<span class="slv lg">bon</span></span>
+              <span class="stag"><i class="fab fa-css3-alt"></i>CSS3<span class="slv lg">notions</span></span>
+              <span class="stag"><i class="fab fa-js-square"></i>JavaScript<span class="slv lm">notions</span></span>
+              <span class="stag"><i class="fab fa-php"></i>PHP<span class="slv ll">notions</span></span>
+              <span class="stag"><i class="fa fa-database"></i>MySQL<span class="slv ll">notions</span></span>
+            </div>
+          </div>
+          <div class="scat">
+            <div class="scattt"><i class="fa fa-tools me-2"></i>Outils &amp; Logiciels</div>
+            <div class="stags">
+              <span class="stag"><i class="fab fa-git-alt"></i>Hyper-V<span class="slv lm">bon</span></span>
+              <span class="stag"><i class="fa fa-code"></i>VS Code<span class="slv lg">bon</span></span>
+              <span class="stag"><i class="fab fa-microsoft"></i>Office 365<span class="slv lg">bon+</span></span>
+              <span class="stag"><i class="fa fa-box"></i>PingCastle<span class="slv lm">bon</span></span>
+              <span class="stag"><i class="fa fa-bug"></i>Wireshark<span class="slv ll">notions</span></span>
+              <span class="stag"><i class="fa fa-code"></i>PowerShell<span class="slv lm">bon</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets" class="sec sec-alt">
+    <div class="container">
+      <div class="text-center mb-5 fu"><span class="slb">Réalisations</span>
+        <h2 class="sti">Mes projets</h2>
+        <div class="sbar cx"></div>
+        <p class="ssub mx-auto">Projets professionnels et scolaires réalisés au cours de ma formation BTS SIO.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6 col-md-6 fu d1">
+          <div class="pcard">
+            <div class="pthumb"><img src="assets/img/PingCastle.jpg"
+                style="object-fit: contain; padding: 12px; background: #b36b1a;" alt="Projet scolaire"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="pph" style="display:none"><i class="fa fa-mountain"></i></div><span
+                class="pbdg bpu">Scolaire</span>
+            </div>
+            <div class="pbdy">
+              <h4>PingCastle</h4>
+              <p>Projet scolaire réalisé lors de ma deuxième année — audit de sécurité sur l'Active Directory.</p>
+              <div class="ptechs"><span class="pt">Windows Server</span><span class="pt">Active Directory</span><span
+                  class="pt">Audit</span></div>
+              <div class="pbtns"><a href="pdfs/E6_ProjetPingCastle_2026.pdf" class="pb pbm"><i
+                    class="fa fa-eye"></i>Voir FicheE6</a><a href="pdfs/PROCEDURE DE DURCISSEMENt.pdf" target="_blank"
+                  download class="pb pbs"><i class="fa fa-file-pdf"></i>PDF_Procédure</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 fu d2">
+          <div class="pcard">
+            <div class="pthumb"><img src="assets/img/centreon.jpg" alt="Projet pro"
+               style="object-fit: contain; padding: 12px; background: #484fb9;" alt="Projet pro"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="pph" style="display:none"><i class="fa fa-globe"></i></div><span
+                class="pbdg bps">Professionnel</span>
+            </div>
+            <div class="pbdy">
+              <h4>Déploiement Centreon</h4>
+              <p>Dans le cadre d'un contract client au seins de mon alternance nous avons du déployer l'outil de supervision Centreon.</p>
+              <div class="ptechs"><span class="pt">Supervision</span><span class="pt">Réseau</span><span
+                  class="pt">Surveillance</span></div>
+              <div class="pbtns"><a href="projets/projet2.html" class="pb pbm"><i 
+                    class="fa fa-eye"></i>Voir FicheE6</a><a
+                  href="pdfs/Fiche projet Portfolio.pdf" target="_blank" download class="pb pbs"><i
+                    class="fa fa-file-pdf"></i>PDF_Procédure</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 fu d3">
+          <div class="pcard">
+            <div class="pthumb"><img src="assets/img/glpi-ocs.jpg" alt="GLPI + OCS"
+               style="object-fit: contain; padding: 12px; background: #450579;" alt="Projet pro"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="pph" style="display:none"><i class="fa fa-table"></i></div><span
+                class="pbdg bps">Scolaire</span>
+            </div>
+            <div class="pbdy">
+              <h4>GLPI + OCS</h4>
+              <p>Installation de GLPI et OCS liés au seins de mon lab.</p>
+              <div class="ptechs"><span class="pt">GLPI</span><span class="pt">OCS</span><span
+                  class="pt">Inventaire</span></div>
+              <div class="pbtns"><a href="projets/projet3.html" class="pb pbm"><i class="fa fa-eye"></i>Voir FicheE6</a><a
+                  href="pdfs/Tableau de Synthèse BTS SIO 2.pdf" target="_blank" download class="pb pbs"><i
+                    class="fa fa-file-pdf"></i>PDF_Procédure</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 fu d4">
+          <div class="pcard">
+            <div class="pthumb"><img src="assets/img/STORMSHIELD.jpg" alt="pare-feu"
+               style="object-fit: contain; padding: 12px; background: #281a77;" alt="Projet pro"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="pph" style="display:none"><i class="fa fa-server"></i></div><span
+                class="pbdg bpu">Professionnel</span>
+            </div>
+            <div class="pbdy">
+              <h4>Installation pare-feu et PC</h4>
+              <p>Configuration et installation d'un pare-feu Stormshield neuf pour connecter un site distant + imprimante et PC'S
+              <div class="ptechs"><span class="pt">Stormshield</span><span class="pt">Règles</span></div>
+              <div class="pbtns"><a href="projets/projet4.html" class="pb pbm"><i class="fa fa-eye"></i>Voir FicheE6</a><a
+                  href="pdfs/projet4.pdf" target="_blank" download class="pb pbs"><i class="fa fa-file-pdf"></i>PDF_Procédure</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEILLE RSS CERT-FR -->
+  <section id="veille" class="sec sec-dark">
+    <div class="container">
+      <div class="row align-items-end mb-3 fu">
+        <div class="col-lg-7">
+          <span class="slb">Veille technologique</span>
+          <h2 class="sti">Alertes de sécurité en direct</h2>
+          <div class="sbar"></div>
+          <p class="ssub">Flux RSS automatique du <strong>CERT-FR (ANSSI)</strong> — dernières vulnérabilités et avis de
+            sécurité officiels, mis à jour en temps réel.</p>
+        </div>
+        <div class="col-lg-5 mt-3 mt-lg-0">
+          <div class="vstatus"><span class="vsdot ld" id="vdot"></span><span id="vtxt">Chargement du flux
+              CERT-FR…</span></div>
+          <div class="vtabs">
+            <button class="vtab on" onclick="fv(this,'all')">Alertes</button>
+          </div>
+        </div>
+      </div>
+      <div id="vload" class="fu d1"><i class="fa fa-circle-notch"></i>
+        <p>Récupération des alertes de sécurité…</p>
+      </div>
+      <div id="verr"><i class="fa fa-triangle-exclamation"
+          style="font-size:2rem;color:#ef4444;display:block;margin-bottom:10px"></i>
+        <p>Impossible de charger le flux RSS. <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank"
+            style="color:var(--pu)">Consulter directement le CERT-FR →</a></p>
+      </div>
+      <div class="vgrid fu d2" id="vgrid" style="display:none;"></div>
+      <div class="text-center mt-4 fu d3">
+        <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" class="bp" style="display:inline-flex;"><i
+            class="fa fa-arrow-up-right-from-square"></i>Toutes les alertes CERT-FR</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="sec sec-alt">
+    <div class="container">
+      <div class="text-center mb-5 fu"><span class="slb">Contact</span>
+        <h2 class="sti">Me contacter</h2>
+        <div class="sbar cx"></div>
+      </div>
+      <div class="ctwrap fu d1">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <div class="cpl">
+              <h3>Restons en contact</h3>
+              <p class="sub">Je m'engage à vous répondre dans les 48h suivant la réception de votre message.</p>
+              <div class="cdet">
+                <div class="cdico"><i class="fa fa-phone"></i></div>
+                <div>
+                  <div class="lb">Téléphone</div>
+                  <div class="vl">+33 7 81 50 79 21</div>
+                </div>
+              </div>
+              <div class="cdet">
+                <div class="cdico"><i class="fa fa-map-marker-alt"></i></div>
+                <div>
+                  <div class="lb">Localisation</div>
+                  <div class="vl">Chambéry / Albertville (73)</div>
+                </div>
+              </div>
+              <div class="cdet">
+                <div class="cdico"><i class="fa fa-building"></i></div>
+                <div>
+                  <div class="lb">École</div>
+                  <div class="vl">ECORIS Chambéry</div>
+                </div>
+              </div>
+              <div class="csoc">
+                <a href="https://www.linkedin.com/in/jolan-boch-837348290/" target="_blank" class="sb"><i
+                    class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/jolan.boch/" target="_blank" class="sb"><i
+                    class="fab fa-instagram"></i></a>
+                <a href="#" class="sb"><i class="fab fa-discord"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="cpr">
+              <h3>Envoyer un message</h3>
+              <p class="sub">Remplissez le formulaire ci-dessous, je vous répondrai rapidement.</p>
+              <form action="https://formspree.io/f/mjknokkg" method="POST">
+                <div class="row g-3 mb-3">
+                  <div class="col-sm-6"><label class="flb">Nom</label><input type="text" name="name" class="fin"
+                      placeholder="Votre nom" required></div>
+                  <div class="col-sm-6"><label class="flb">Email</label><input type="email" name="email" class="fin"
+                      placeholder="votre@email.com" required></div>
+                </div>
+                <div class="mb-3"><label class="flb">Sujet</label><input type="text" name="subject" class="fin"
+                    placeholder="Objet de votre message"></div>
+                <div class="mb-3"><label class="flb">Message</label><textarea name="message" class="fin"
+                    placeholder="Votre message pour Jolan…" required></textarea></div>
+                <button type="submit" class="bsnd"><i class="fa fa-paper-plane"></i>Envoyer le message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="ft">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="ftl"><span>BOCH</span> Jolan</div>
+          <p style="font-size:.85rem;line-height:1.75;max-width:270px;color:var(--txm)">Étudiant BTS SIO SISR passionné
+            par les réseaux, les systèmes et la cybersécurité.</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-6">
+          <h5>Navigation</h5>
+          <ul class="ftlks">
+            <li><a href="#hero">Accueil</a></li>
+            <li><a href="#parcours">Parcours</a></li>
+            <li><a href="#ecole">École</a></li>
+            <li><a href="#entreprise">Entreprise</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#veille">Veille</a></li>
+            <li><a href="#projets">Projets</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-3 col-6">
+          <h5>Projets</h5>
+          <ul class="ftlks">
+            <li><a href="projets/projet1.html">Projet pro</a></li>
+            <li><a href="projets/projet2.html">Portfolio</a></li>
+            <li><a href="projets/projet3.html">Tableau synthèse</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5>Liens utiles</h5>
+          <ul class="ftlks">
+            <li><a href="https://www.cert.ssi.gouv.fr/" target="_blank"><i class="fa fa-shield-alt me-2"
+                  style="color:var(--pl)"></i>CERT-FR</a></li>
+            <li><a href="https://www.ssi.gouv.fr/" target="_blank"><i class="fa fa-lock me-2"
+                  style="color:var(--pl)"></i>ANSSI</a></li>
+            <li><a href="https://ecoris.com/" target="_blank"><i class="fa fa-school me-2"
+                  style="color:var(--pl)"></i>ECORIS</a></li>
+            <li><a href="https://www.linkedin.com/in/jolan-boch-837348290/" target="_blank"><i
+                  class="fab fa-linkedin me-2" style="color:var(--pl)"></i>LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fthr"></div>
+      <div class="ftbot">
+        <p>&copy; 2025 <span class="ac">BOCH Jolan</span> — Portfolio BTS SIO SISR</p>
+        <p>Fait avec <span class="ac">♥</span> à Chambéry</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* Navbar */
+    window.addEventListener('scroll', () => document.getElementById('nb').classList.toggle('sc', scrollY > 50));
+
+    /* Mobile nav */
+    document.getElementById('ntog').addEventListener('click', () => { const m = document.getElementById('mnav'); m.style.display = m.style.display === 'none' ? 'block' : 'none' });
+    function cm() { document.getElementById('mnav').style.display = 'none' }
+
+    /* Scroll animations */
+    const obs = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); obs.unobserve(x.target) } }) }, { threshold: .1 });
+    document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+    /* Active nav */
+    const secs = document.querySelectorAll('section[id]'), nls = document.querySelectorAll('.nl');
+    window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 130) c = s.id }); nls.forEach(l => l.classList.toggle('ac', l.getAttribute('href') === '#' + c)) });
+
+    /* ═══════════════════════════════════════════════════
+       RSS CERT-FR — Via allorigins.win (JSON mode)
+    ═══════════════════════════════════════════════════ */
+    const FEEDS = [
+      { key: 'certfr', name: 'CERT-FR Avis', url: 'https://www.cert.ssi.gouv.fr/feed/', cls: 'sc-certfr' },
+      { key: 'alerte', name: 'CERT-FR Alertes', url: 'https://www.cert.ssi.gouv.fr/alerte/feed/', cls: 'sc-anssi' }
+    ];
+    let ALL = [], CUR = 'all';
+
+    async function fetchFeed(feed) {
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}&callback=?`;
+      try {
+        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`);
+        const json = await res.json();
+        const xml = json.contents;
+        if (!xml) return [];
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xml, 'text/xml');
+        const items = Array.from(doc.querySelectorAll('item'));
+
+        return items.map(item => {
+          // <link> en RSS est un nœud texte après le tag, pas un attribut
+          let link = '#';
+          const linkNode = item.querySelector('link');
+          if (linkNode) {
+            link = linkNode.textContent.trim() ||
+              linkNode.nextSibling?.textContent?.trim() || '#';
+          }
+          return {
+            title: item.querySelector('title')?.textContent?.trim() || 'Sans titre',
+            link,
+            desc: item.querySelector('description')?.textContent?.trim() || '',
+            date: item.querySelector('pubDate')?.textContent?.trim() || '',
+            sk: feed.key,
+            sn: feed.name,
+            sc: feed.cls
+          };
+        });
+      } catch (e) {
+        console.warn('Erreur flux', feed.name, e);
+        return [];
+      }
+    }
+
+    function fmtDate(s) {
+      if (!s) return '';
+      try { return new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }); }
+      catch { return s; }
+    }
+
+    function trunc(s, n = 130) {
+      if (!s) return '';
+      const clean = s.replace(/<[^>]+>/g, '').replace(/&[a-z#0-9]+;/gi, ' ').trim();
+      return clean.length > n ? clean.slice(0, n) + '…' : clean;
+    }
+
+    function render(items) {
+      const g = document.getElementById('vgrid');
+      const list = CUR === 'all' ? items : items.filter(i => i.sk === CUR);
+      if (!list.length) {
+        g.innerHTML = '<p style="color:var(--txm);text-align:center;padding:30px 0;grid-column:1/-1">Aucune alerte pour ce filtre.</p>';
+        return;
+      }
+      g.innerHTML = list.map(i => `
+    <div class="acard">
+      <div class="ahead">
+        <span class="sbadge ${i.sc}">${i.sn}</span>
+        <span class="adate">${fmtDate(i.date)}</span>
+      </div>
+      <h4>${i.title}</h4>
+      <p>${trunc(i.desc)}</p>
+      <a href="${i.link}" target="_blank" rel="noopener" class="alink">Voir l'alerte <i class="fa fa-arrow-right"></i></a>
+    </div>`).join('');
+    }
+
+    function fv(btn, key) {
+      document.querySelectorAll('.vtab').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      CUR = key;
+      render(ALL);
+    }
+
+    async function loadRSS() {
+      const dot = document.getElementById('vdot');
+      const txt = document.getElementById('vtxt');
+      const grid = document.getElementById('vgrid');
+      const ld = document.getElementById('vload');
+      const err = document.getElementById('verr');
+
+      try {
+        const results = await Promise.all(FEEDS.map(fetchFeed));
+        ALL = results.flat().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 20);
+
+        ld.style.display = 'none';
+
+        if (!ALL.length) throw new Error('Aucune alerte');
+
+        dot.className = 'vsdot';
+        txt.textContent = `${ALL.length} alertes · mis à jour à ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+        grid.style.display = 'grid';
+        render(ALL);
+
+      } catch (e) {
+        ld.style.display = 'none';
+        err.style.display = 'block';
+        err.innerHTML = `
+      <i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:10px"></i>
+      <p style="margin-bottom:12px">Impossible de charger le flux RSS.</p>
+      <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">
+        Consulter directement le CERT-FR →
+      </a>`;
+        dot.className = 'vsdot er';
+        txt.textContent = 'Flux indisponible';
+      }
+    }
+
+    loadRSS();
+  </script>
+</body>
+
+</html>
