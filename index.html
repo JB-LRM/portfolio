@@ -2155,8 +2155,8 @@
     window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 130) c = s.id }); nls.forEach(l => l.classList.toggle('ac', l.getAttribute('href') === '#' + c)) });
 
     /* ═══════════════════════════════════════════════════════
-       VEILLE RSS — 3 sources x 4 articles = 12 articles
-       Proxies en PARALLELE (Promise.any) — le plus rapide gagne
+       VEILLE RSS — Proxy Vercel /api/rss
+       Aucune dépendance externe, toujours à jour
     ═══════════════════════════════════════════════════════ */
 
     const FEEDS = [
@@ -2166,10 +2166,7 @@
     ];
     let ALL = [], CUR = 'all';
 
-    function withTimeout(promise, ms) {
-      return Promise.race([promise, new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('timeout')); }, ms); })]);
-    }
-
+    /* ── Parse XML RSS → 4 articles max ── */
     function parseXML(xml, feed) {
       try {
         const doc = new DOMParser().parseFromString(xml, 'text/xml');
@@ -2181,7 +2178,9 @@
           if (link === '#' && le) {
             let n = le.nextSibling;
             while (n) {
-              if (n.nodeType === 3 && n.textContent.trim().indexOf('http') === 0) { link = n.textContent.trim(); break; }
+              if (n.nodeType === 3 && n.textContent.trim().indexOf('http') === 0) {
+                link = n.textContent.trim(); break;
+              }
               n = n.nextSibling;
             }
           }
@@ -2200,69 +2199,39 @@
       } catch(e) { return []; }
     }
 
-    function pA(feed, eub) {
-      return withTimeout(fetch('https://api.rss2json.com/v1/api.json?rss_url=' + eub + '&count=4'), 6000)
-        .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-        .then(function(d){
-          if (d.status !== 'ok' || !d.items || !d.items.length) throw 0;
-          return d.items.slice(0,4).map(function(i){ return { title:i.title||'Sans titre', link:i.link||'#', desc:i.description||'', date:i.pubDate||'', sk:feed.key, sn:feed.name, sc:feed.cls }; });
-        });
+    /* ── Fetch un flux via le proxy Vercel /api/rss ── */
+    async function fetchFeed(feed) {
+      try {
+        const proxyUrl = '/api/rss?url=' + encodeURIComponent(feed.url) + '&t=' + Date.now();
+        const ctrl = new AbortController();
+        const timer = setTimeout(function(){ ctrl.abort(); }, 10000);
+        const r = await fetch(proxyUrl, { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!r.ok) return [];
+        const xml = await r.text();
+        if (!xml.includes('<item>')) return [];
+        return parseXML(xml, feed).slice(0, 4);
+      } catch(e) {
+        return [];
+      }
     }
 
-    function pB(feed, eu) {
-      return withTimeout(fetch('https://corsproxy.io/?' + eu), 6000)
-        .then(function(r){ if (!r.ok) throw 0; return r.text(); })
-        .then(function(xml){
-          if (!xml.includes('<item>')) throw 0;
-          const items = parseXML(xml, feed);
-          if (!items.length) throw 0;
-          return items;
-        });
-    }
-
-    function pC(feed, eub) {
-      return withTimeout(fetch('https://api.allorigins.win/get?url=' + eub), 6000)
-        .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-        .then(function(d){
-          if (!d || !d.contents || !d.contents.includes('<item>')) throw 0;
-          const items = parseXML(d.contents, feed);
-          if (!items.length) throw 0;
-          return items;
-        });
-    }
-
-    function pD(feed, eub) {
-      return withTimeout(fetch('https://api.allorigins.win/raw?url=' + eub), 6000)
-        .then(function(r){ if (!r.ok) throw 0; return r.text(); })
-        .then(function(xml){
-          if (!xml.includes('<item>')) throw 0;
-          const items = parseXML(xml, feed);
-          if (!items.length) throw 0;
-          return items;
-        });
-    }
-
-    function fetchFeed(feed) {
-      const t   = Date.now();
-      const eu  = encodeURIComponent(feed.url);
-      const eub = encodeURIComponent(feed.url + '?_=' + t);
-      return Promise.any([pA(feed,eub), pB(feed,eu), pC(feed,eub), pD(feed,eub)])
-        .catch(function(){ return []; });
-    }
-
+    /* ── Format date ── */
     function fmtDate(s) {
       if (!s) return '';
       try { return new Date(s).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' }); }
       catch(e) { return ''; }
     }
 
+    /* ── Tronquer texte ── */
     function trunc(s, n) {
       n = n || 130;
       if (!s) return '';
       const c = s.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
-      return c.length > n ? c.slice(0,n) + '…' : c;
+      return c.length > n ? c.slice(0, n) + '\u2026' : c;
     }
 
+    /* ── Rendu des cards ── */
     function render(items) {
       const g = document.getElementById('vgrid');
       const list = CUR === 'all' ? items : items.filter(function(i){ return i.sk === CUR; });
@@ -2271,10 +2240,21 @@
         return;
       }
       g.innerHTML = list.map(function(i) {
-        return '<div class="acard"><div class="ahead"><span class="sbadge ' + i.sc + '">' + i.sn + '</span><span class="adate">' + fmtDate(i.date) + '</span></div><h4>' + i.title + '</h4><p>' + trunc(i.desc) + '</p><a href="' + i.link + '" target="_blank" rel="noopener" class="alink">Voir plus <i class="fa fa-arrow-right"></i></a></div>';
+        return [
+          '<div class="acard">',
+          '<div class="ahead">',
+          '<span class="sbadge ' + i.sc + '">' + i.sn + '</span>',
+          '<span class="adate">' + fmtDate(i.date) + '</span>',
+          '</div>',
+          '<h4>' + i.title + '</h4>',
+          '<p>' + trunc(i.desc) + '</p>',
+          '<a href="' + i.link + '" target="_blank" rel="noopener" class="alink">Voir plus <i class="fa fa-arrow-right"></i></a>',
+          '</div>'
+        ].join('');
       }).join('');
     }
 
+    /* ── Filtre par onglet ── */
     function fv(btn, key) {
       document.querySelectorAll('.vtab').forEach(function(b){ b.classList.remove('on'); });
       btn.classList.add('on');
@@ -2282,33 +2262,53 @@
       render(ALL);
     }
 
+    /* ── Chargement principal ── */
     async function loadRSS() {
       const dot  = document.getElementById('vdot');
       const txt  = document.getElementById('vtxt');
       const grid = document.getElementById('vgrid');
       const ld   = document.getElementById('vload');
       const err  = document.getElementById('verr');
+
       try {
+        /* 3 feeds en parallèle — indépendants */
         const results = await Promise.allSettled(FEEDS.map(fetchFeed));
-        const allItems = [], okNames = [];
+
+        const allItems = [];
+        const okNames  = [];
+
         results.forEach(function(r, i) {
           if (r.status === 'fulfilled' && r.value && r.value.length) {
-            const sorted = r.value.sort(function(a,b){ return new Date(b.date)-new Date(a.date); }).slice(0,4);
+            const sorted = r.value.sort(function(a,b){
+              return new Date(b.date) - new Date(a.date);
+            }).slice(0, 4);
             allItems.push.apply(allItems, sorted);
             okNames.push(FEEDS[i].name);
           }
         });
-        ALL = allItems.sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+
+        ALL = allItems.sort(function(a,b){
+          return new Date(b.date) - new Date(a.date);
+        });
+
         ld.style.display = 'none';
-        if (!ALL.length) throw new Error('vide');
+
+        if (!ALL.length) throw new Error('Aucun article chargé');
+
         dot.className = 'vsdot';
-        txt.textContent = ALL.length + ' articles · ' + okNames.join(', ') + ' · ' + new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+        txt.textContent = ALL.length + ' articles · ' + okNames.join(', ') + ' · ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
         grid.style.display = 'grid';
         render(ALL);
+
       } catch(e) {
         ld.style.display = 'none';
         err.style.display = 'block';
-        err.innerHTML = '<i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:12px"></i><p style="margin-bottom:14px;color:var(--txm)">Impossible de charger les flux RSS.</p><a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">Consulter directement le CERT-FR →</a>';
+        err.innerHTML = [
+          '<i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:12px"></i>',
+          '<p style="margin-bottom:14px;color:var(--txm)">Impossible de charger les flux RSS.</p>',
+          '<a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">',
+          'Consulter directement le CERT-FR \u2192</a>'
+        ].join('');
         dot.className = 'vsdot er';
         txt.textContent = 'Flux indisponibles';
       }
