@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio BTS SIO SISR — Jolan BOCH, étudiant à ECORIS Chambéry">
-  <title>BOCH Jolan — Portfolio BTS SIO SISR</title>
+  <meta name="description" content="Portfolio BTS SIO SISR â€” Jolan BOCH, Ã©tudiant Ã  ECORIS ChambÃ©ry">
+  <title>BOCH Jolan â€” Portfolio BTS SIO SISR</title>
   <link rel="icon" type="image/png"
     href="assets/img/J B.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -518,7 +518,7 @@
       transition-delay: .4s
     }
 
-    /* À PROPOS CARDS */
+    /* Ã€ PROPOS CARDS */
     .icard {
       background: var(--wh);
       border: 1px solid var(--bd);
@@ -651,7 +651,7 @@
       margin: 0
     }
 
-    /* COMPÉTENCES */
+    /* COMPÃ‰TENCES */
     .scat {
       margin-bottom: 30px
     }
@@ -729,13 +729,13 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 24px
+      margin-bottom: 28px
     }
 
     .vtab {
-      padding: 7px 18px;
+      padding: 6px 16px;
       border-radius: 50px;
-      font-size: .82rem;
+      font-size: .8rem;
       font-weight: 500;
       border: 1px solid var(--bd);
       background: var(--wh);
@@ -753,7 +753,7 @@
 
     .vgrid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 18px
     }
 
@@ -772,9 +772,7 @@
     .acard::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
       background: var(--pu);
       transform: scaleX(0);
@@ -782,12 +780,10 @@
       transition: transform var(--t)
     }
 
-    .acard:hover::before {
-      transform: scaleX(1)
-    }
+    .acard:hover::before { transform: scaleX(1) }
 
     .acard:hover {
-      box-shadow: 0 10px 35px rgba(0, 0, 0, .3);
+      box-shadow: 0 10px 35px rgba(0,0,0,.3);
       border-color: var(--bdhov);
       transform: translateY(-3px)
     }
@@ -795,14 +791,14 @@
     .ahead {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 8px;
       margin-bottom: 12px
     }
 
     .sbadge {
       font-size: .68rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: .5px;
       text-transform: uppercase;
       padding: 3px 10px;
@@ -810,20 +806,11 @@
       white-space: nowrap
     }
 
-    .sc-certfr {
-      background: rgba(124, 58, 237, .2);
-      color: var(--pl)
-    }
-
-    .sc-anssi {
-      background: rgba(38, 125, 244, .15);
-      color: #6aa3f8
-    }
-
-    .sc-def {
-      background: rgba(255, 255, 255, .08);
-      color: var(--txm)
-    }
+    .sc-certfr  { background: rgba(124,58,237,.2);  color: var(--pl) }
+    .sc-alerte  { background: rgba(239,68,68,.15);  color: #f87171 }
+    .sc-itco    { background: rgba(34,197,94,.15);  color: #4ade80 }
+    .sc-silicon { background: rgba(38,125,244,.15); color: #6aa3f8 }
+    .sc-01net   { background: rgba(249,115,22,.15); color: #fb923c }
 
     .adate {
       font-size: .72rem;
@@ -835,7 +822,7 @@
       font-size: .88rem;
       font-weight: 700;
       color: #eeeeff;
-      line-height: 1.4;
+      line-height: 1.45;
       margin-bottom: 10px;
       flex: 1
     }
@@ -859,10 +846,7 @@
       transition: gap var(--t), color var(--t)
     }
 
-    .alink:hover {
-      gap: 10px;
-      color: #a78bfa
-    }
+    .alink:hover { gap: 10px; color: #a78bfa }
 
     .vstatus {
       display: flex;
@@ -874,21 +858,14 @@
     }
 
     .vsdot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: #22c55e;
       animation: blink 2s infinite
     }
 
-    .vsdot.ld {
-      background: #f59e0b
-    }
-
-    .vsdot.er {
-      background: #ef4444;
-      animation: none
-    }
+    .vsdot.ld { background: #f59e0b }
+    .vsdot.er { background: #ef4444; animation: none }
 
     #vload {
       text-align: center;
@@ -905,11 +882,7 @@
       display: block
     }
 
-    @keyframes spini {
-      to {
-        transform: rotate(360deg)
-      }
-    }
+    @keyframes spini { to { transform: rotate(360deg) } }
 
     #verr {
       display: none;
@@ -1070,7 +1043,7 @@
       background: rgba(255, 255, 255, .1)
     }
 
-    /* ÉCOLE / ENTREPRISE */
+    /* Ã‰COLE / ENTREPRISE */
     .org-wrap {
       background: var(--wh);
       border: 1px solid var(--bd);
@@ -1552,9 +1525,9 @@
         <ul class="nav d-none d-md-flex align-items-center gap-1 mb-0">
           <li><a href="#hero" class="nl ac">Accueil</a></li>
           <li><a href="#parcours" class="nl">Parcours</a></li>
-          <li><a href="#ecole" class="nl">École</a></li>
+          <li><a href="#ecole" class="nl">Ã‰cole</a></li>
           <li><a href="#entreprise" class="nl">Entreprise</a></li>
-          <li><a href="#competences" class="nl">Compétences</a></li>
+          <li><a href="#competences" class="nl">CompÃ©tences</a></li>
           <li><a href="#projets" class="nl">Projets</a></li>
           <li><a href="#veille" class="nl">Veille</a></li>
           <li><a href="#contact" class="nl ncta">Contact</a></li>
@@ -1565,9 +1538,9 @@
       <div id="mnav">
         <a href="#hero" class="ml" onclick="cm()">Accueil</a>
         <a href="#parcours" class="ml" onclick="cm()">Parcours</a>
-        <a href="#ecole" class="ml" onclick="cm()">École</a>
+        <a href="#ecole" class="ml" onclick="cm()">Ã‰cole</a>
         <a href="#entreprise" class="ml" onclick="cm()">Entreprise</a>
-        <a href="#competences" class="ml" onclick="cm()">Compétences</a>
+        <a href="#competences" class="ml" onclick="cm()">CompÃ©tences</a>
         <a href="#projets" class="ml" onclick="cm()">Projets</a>
         <a href="#veille" class="ml" onclick="cm()">Veille</a>
         <a href="#contact" class="ml" onclick="cm()">Contact</a>
@@ -1583,13 +1556,13 @@
     <div class="container hi py-5">
       <div class="row align-items-center">
         <div class="col-lg-7">
-          <div class="hbadge fu"><span class="bdot"></span>BTS SIO · Option SISR</div>
+          <div class="hbadge fu"><span class="bdot"></span>BTS SIO Â· Option SISR</div>
           <h1 class="ht fu d1">Bonjour,</br> je suis<br><span class="ac">Jolan BOCH</span></h1>
-          <p class="hd fu d2">Étudiant en <strong>BTS SIO SISR</strong> à ECORIS Chambéry.<br>Passionné par les réseaux,
-            l'infrastructure et la cybersécurité.</p>
+          <p class="hd fu d2">Ã‰tudiant en <strong>BTS SIO SISR</strong> Ã  ECORIS ChambÃ©ry.<br>PassionnÃ© par les rÃ©seaux,
+            l'infrastructure et la cybersÃ©curitÃ©.</p>
           <div class="hbtns fu d3">
             <a href="#projets" class="bp"><i class="fa fa-folder-open"></i>Mes projets</a>
-            <a href="pdfs/CV J.BOCH alternance.pdf" target="_blank" class="bo"><i class="fa fa-download"></i>Télécharger
+            <a href="pdfs/CV J.BOCH alternance.pdf" target="_blank" class="bo"><i class="fa fa-download"></i>TÃ©lÃ©charger
               CV</a>
           </div>
           <div class="hstats fu d4">
@@ -1599,7 +1572,7 @@
             </div>
             <div>
               <div class="hsn">4<span>+</span></div>
-              <div class="hsl">projets réalisés</div>
+              <div class="hsl">projets rÃ©alisÃ©s</div>
             </div>
             <div>
               <div class="hsn">1 + 1</div>
@@ -1610,29 +1583,29 @@
         <div class="col-lg-5 hicol">
           <div class="aring fu d2">
             <div class="ainn">
-              <img src="assets/img/Photo unité.png" alt="Jolan BOCH">
+              <img src="assets/img/Photo unitÃ©.png" alt="Jolan BOCH">
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="hscroll"><span>Défiler</span><i class="fa fa-chevron-down"></i></div>
+    <div class="hscroll"><span>DÃ©filer</span><i class="fa fa-chevron-down"></i></div>
   </section>
 
-  <!-- À PROPOS -->
+  <!-- Ã€ PROPOS -->
   <section id="apropos" class="sec">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-5 fu">
-          <span class="slb">À propos</span>
+          <span class="slb">Ã€ propos</span>
           <h2 class="sti">Qui suis-je ?</h2>
           <div class="sbar"></div>
-          <p style="color:var(--txm);line-height:1.8;font-size:.93rem;margin-bottom:14px;">Passionné d'informatique, je
-            me suis orienté vers le BTS SIO option SISR pour me spécialiser dans les réseaux, les systèmes et la
-            cybersécurité.</p>
-          <p style="color:var(--txm);line-height:1.8;font-size:.93rem;margin-bottom:28px;">En 1ère année à <strong
-              style="color:#eeeeff">ECORIS Chambéry</strong>, j'ai effectué un stage chez <strong
-              style="color:#eeeeff">Synergie 73</strong> à Albertville où j'ai mis en pratique mes compétences réseau
+          <p style="color:var(--txm);line-height:1.8;font-size:.93rem;margin-bottom:14px;">PassionnÃ© d'informatique, je
+            me suis orientÃ© vers le BTS SIO option SISR pour me spÃ©cialiser dans les rÃ©seaux, les systÃ¨mes et la
+            cybersÃ©curitÃ©.</p>
+          <p style="color:var(--txm);line-height:1.8;font-size:.93rem;margin-bottom:28px;">En 1Ã¨re annÃ©e Ã  <strong
+              style="color:#eeeeff">ECORIS ChambÃ©ry</strong>, j'ai effectuÃ© un stage chez <strong
+              style="color:#eeeeff">Synergie 73</strong> Ã  Albertville oÃ¹ j'ai mis en pratique mes compÃ©tences rÃ©seau
             sur le terrain.</p>
           <a href="#contact" class="bp" style="display:inline-flex;">Me contacter <i class="fa fa-arrow-right"></i></a>
         </div>
@@ -1643,7 +1616,7 @@
                 <div class="iico"><i class="fa fa-graduation-cap"></i></div>
                 <div>
                   <h5>Formation</h5>
-                  <p>BTS SIO SISR — ECORIS Chambéry<br>2024 – 2026</p>
+                  <p>BTS SIO SISR â€” ECORIS ChambÃ©ry<br>2024 â€“ 2026</p>
                 </div>
               </div>
             </div>
@@ -1652,7 +1625,7 @@
                 <div class="iico"><i class="fa fa-briefcase"></i></div>
                 <div>
                   <h5>Stage</h5>
-                  <p>Synergie 73 — Albertville<br>2025 · 2 mois</p>
+                  <p>Synergie 73 â€” Albertville<br>2025 Â· 2 mois</p>
                 </div>
               </div>
             </div>
@@ -1661,7 +1634,7 @@
                 <div class="iico"><i class="fa fa-map-marker-alt"></i></div>
                 <div>
                   <h5>Localisation</h5>
-                  <p>Chambéry / Albertville<br>Savoie (73), France</p>
+                  <p>ChambÃ©ry / Albertville<br>Savoie (73), France</p>
                 </div>
               </div>
             </div>
@@ -1670,7 +1643,7 @@
                 <div class="iico"><i class="fa fa-shield-alt"></i></div>
                 <div>
                   <h5>Option</h5>
-                  <p>SISR — Réseaux &amp; Systèmes<br>Infrastructure · Cybersécurité</p>
+                  <p>SISR â€” RÃ©seaux &amp; SystÃ¨mes<br>Infrastructure Â· CybersÃ©curitÃ©</p>
                 </div>
               </div>
             </div>
@@ -1691,48 +1664,48 @@
         <div class="tli fu">
           <div class="tldot"></div>
           <div class="tlc"><span class="tltag">BAC +0</span>
-            <h3>2020 – 2023 · BAC Général</h3>
-            <p>Lycée Jean-Moulin, Albertville<br>Spécialités Mathématiques / Physique-Chimie</p>
+            <h3>2020 â€“ 2023 Â· BAC GÃ©nÃ©ral</h3>
+            <p>LycÃ©e Jean-Moulin, Albertville<br>SpÃ©cialitÃ©s MathÃ©matiques / Physique-Chimie</p>
           </div>
         </div>
         <div class="tli r fu d1">
           <div class="tldot"></div>
           <div class="tlc"><span class="tltag">BAC +1</span>
-            <h3>2023 – 2024 · BUT MT2E</h3>
-            <p>Orientation initiale dans le bâtiment<br>Réorientation vers l'informatique</p>
+            <h3>2023 â€“ 2024 Â· BUT MT2E</h3>
+            <p>Orientation initiale dans le bÃ¢timent<br>RÃ©orientation vers l'informatique</p>
           </div>
         </div>
         <div class="tli fu d2">
           <div class="tldot"></div>
           <div class="tlc"><span class="tltag">BAC +2</span>
-            <h3>2024 – 2026 · BTS SIO SISR</h3>
-            <p>ECORIS Chambéry<br>Solutions d'Infrastructure, Systèmes et Réseaux</p>
+            <h3>2024 â€“ 2026 Â· BTS SIO SISR</h3>
+            <p>ECORIS ChambÃ©ry<br>Solutions d'Infrastructure, SystÃ¨mes et RÃ©seaux</p>
           </div>
         </div>
         <div class="tli r fu d3">
           <div class="tldot"></div>
           <div class="tlc"><span class="tltag">Stage</span>
-            <h3>2025 · Stage en entreprise</h3>
-            <p>Synergie 73 — Albertville<br>2 mois · Intervention réseau terrain</p>
+            <h3>2025 Â· Stage en entreprise</h3>
+            <p>Synergie 73 â€” Albertville<br>2 mois Â· Intervention rÃ©seau terrain</p>
           </div>
         </div>
         <div class="tli fu d4">
           <div class="tldot"></div>
           <div class="tlc"><span class="tltag" style="background:rgba(124,58,237,.25);color:var(--pu);">En cours</span>
-            <h3>2025 – 2026 · Alternance</h3>
-            <p>Groupe SI2A — Annecy<br>Missions : Support Informatique </em></p>
+            <h3>2025 â€“ 2026 Â· Alternance</h3>
+            <p>Groupe SI2A â€” Annecy<br>Missions : Support Informatique </em></p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ÉCOLE -->
+  <!-- Ã‰COLE -->
   <section id="ecole" class="sec">
     <div class="container">
       <div class="text-center mb-5 fu">
-        <span class="slb">Mon école</span>
-        <h2 class="sti">ECORIS Chambéry</h2>
+        <span class="slb">Mon Ã©cole</span>
+        <h2 class="sti">ECORIS ChambÃ©ry</h2>
         <div class="sbar cx"></div>
       </div>
       <div class="org-wrap fu d1">
@@ -1744,28 +1717,28 @@
 
               </div>
               <h3>ECORIS</h3>
-              <p>Établissement d'enseignement supérieur créé en 1980, présent dans 8 villes en France.</p>
+              <p>Ã‰tablissement d'enseignement supÃ©rieur crÃ©Ã© en 1980, prÃ©sent dans 8 villes en France.</p>
               <a href="https://ecoris.com" target="_blank" class="org-link"><i class="fa fa-globe"></i>ecoris.com</a>
             </div>
           </div>
           <div class="col-lg-8">
             <div class="org-info">
-              <h3>Présentation de l'école</h3>
-              <p class="org-sub">ECORIS est une école qui cherche à se rapprocher au maximum du monde professionnel.
+              <h3>PrÃ©sentation de l'Ã©cole</h3>
+              <p class="org-sub">ECORIS est une Ã©cole qui cherche Ã  se rapprocher au maximum du monde professionnel.
                 Elle met l'accent sur la professionnalisation, l'accompagnement individuel, la mise en pratique et la
-                relation entreprise / étudiant.</p>
+                relation entreprise / Ã©tudiant.</p>
               <div class="org-details">
                 <div class="od">
                   <div class="od-ico"><i class="fa fa-map-marker-alt"></i></div>
                   <div>
                     <div class="od-lbl">Campus</div>
-                    <div class="od-val">574 Rue de Chantabord<br>73000 Chambéry</div>
+                    <div class="od-val">574 Rue de Chantabord<br>73000 ChambÃ©ry</div>
                   </div>
                 </div>
                 <div class="od">
                   <div class="od-ico"><i class="fa fa-phone"></i></div>
                   <div>
-                    <div class="od-lbl">Téléphone</div>
+                    <div class="od-lbl">TÃ©lÃ©phone</div>
                     <div class="od-val">04 79 69 28 17</div>
                   </div>
                 </div>
@@ -1779,8 +1752,8 @@
                 <div class="od">
                   <div class="od-ico"><i class="fa fa-calendar"></i></div>
                   <div>
-                    <div class="od-lbl">Fondée en</div>
-                    <div class="od-val">1980 · 8 villes</div>
+                    <div class="od-lbl">FondÃ©e en</div>
+                    <div class="od-val">1980 Â· 8 villes</div>
                   </div>
                 </div>
               </div>
@@ -1790,7 +1763,7 @@
                 <span class="otag">Bachelor</span>
                 <span class="otag">Master</span>
                 <span class="otag">Alternance</span>
-                <span class="otag">Enseignement supérieur</span>
+                <span class="otag">Enseignement supÃ©rieur</span>
               </div>
             </div>
           </div>
@@ -1816,16 +1789,16 @@
 
               </div>
               <h3>Groupe SI2A<em style="color:rgba(255,255,255,.5);font-style:normal"></em></h3>
-              <p>Entreprise crée en 2012, présente en Savoie/Haute-savoie, Ain, ...</p>
+              <p>Entreprise crÃ©e en 2012, prÃ©sente en Savoie/Haute-savoie, Ain, ...</p>
               <a href="https://www.groupe-si2a.com/formations-projets-services-informatiques-annecy-chambery-grenoble/"
                 target="_blank" class="org-link"><i class="fa fa-globe"></i>groupe-si2a.com</a>
             </div>
           </div>
           <div class="col-lg-8">
             <div class="org-info">
-              <h3>Présentation de l'entreprise</h3>
+              <h3>PrÃ©sentation de l'entreprise</h3>
               <p class="org-sub">
-                Le Groupe SI2A est une ESN (Entreprise de Service du Numérique), le Groupe se décline en deux grands pôles, SI2A Services Numériques et SI2A Consulting.<em
+                Le Groupe SI2A est une ESN (Entreprise de Service du NumÃ©rique), le Groupe se dÃ©cline en deux grands pÃ´les, SI2A Services NumÃ©riques et SI2A Consulting.<em
                   style="color:var(--gr)">
                   </em></p>
               <div class="org-details">
@@ -1839,7 +1812,7 @@
                 <div class="od">
                   <div class="od-ico"><i class="fa fa-phone"></i></div>
                   <div>
-                    <div class="od-lbl">Téléphone</div>
+                    <div class="od-lbl">TÃ©lÃ©phone</div>
                     <div class="od-val">04 50 69 24 77</em></div>
                   </div>
                 </div>
@@ -1854,7 +1827,7 @@
                   <div class="od-ico"><i class="fa fa-briefcase"></i></div>
                   <div>
                     <div class="od-lbl">Contrat</div>
-                    <div class="od-val">Alternance 2025 – 2026</div>
+                    <div class="od-val">Alternance 2025 â€“ 2026</div>
                   </div>
                 </div>
               </div>
@@ -1871,24 +1844,24 @@
     </div>
   </section>
 
-  <!-- COMPÉTENCES -->
+  <!-- COMPÃ‰TENCES -->
   <section id="competences" class="sec">
     <div class="container">
       <div class="row g-5">
         <div class="col-lg-4 fu">
-          <span class="slb">Compétences</span>
+          <span class="slb">CompÃ©tences</span>
           <h2 class="sti">Outils &amp; technologies</h2>
           <div class="sbar"></div>
-          <p class="ssub">Acquises en Cours, en Entreprise et en Autonomie — les technologies que je maîtrise ou que
+          <p class="ssub">Acquises en Cours, en Entreprise et en Autonomie â€” les technologies que je maÃ®trise ou que
             j'apprends activement.</p>
-          <a href="pdfs/Tableau de Synthèse BTS SIO 2.pdf" target="_blank" class="bp"
+          <a href="pdfs/Tableau de SynthÃ¨se BTS SIO 2.pdf" target="_blank" class="bp"
             style="display:inline-flex;margin-top:28px;font-size:.85rem;padding:12px 22px;">
-            <i class="fa fa-table"></i> Tableau de synthèse
+            <i class="fa fa-table"></i> Tableau de synthÃ¨se
           </a>
         </div>
         <div class="col-lg-8 fu d1">
           <div class="scat">
-            <div class="scattt"><i class="fa fa-network-wired me-2"></i>Réseaux &amp; Infrastructure</div>
+            <div class="scattt"><i class="fa fa-network-wired me-2"></i>RÃ©seaux &amp; Infrastructure</div>
             <div class="stags">
               <span class="stag"><i class="fa fa-network-wired"></i>Cisco Packet Tracer<span
                   class="slv lg">bon</span></span>
@@ -1899,7 +1872,7 @@
             </div>
           </div>
           <div class="scat">
-            <div class="scattt"><i class="fa fa-code me-2"></i>Développement Web</div>
+            <div class="scattt"><i class="fa fa-code me-2"></i>DÃ©veloppement Web</div>
             <div class="stags">
               <span class="stag"><i class="fab fa-html5"></i>HTML5<span class="slv lg">bon</span></span>
               <span class="stag"><i class="fab fa-css3-alt"></i>CSS3<span class="slv lg">notions</span></span>
@@ -1927,10 +1900,10 @@
   <!-- PROJETS -->
   <section id="projets" class="sec sec-alt">
     <div class="container">
-      <div class="text-center mb-5 fu"><span class="slb">Réalisations</span>
+      <div class="text-center mb-5 fu"><span class="slb">RÃ©alisations</span>
         <h2 class="sti">Mes projets</h2>
         <div class="sbar cx"></div>
-        <p class="ssub mx-auto">Projets professionnels et scolaires réalisés au cours de ma formation BTS SIO.</p>
+        <p class="ssub mx-auto">Projets professionnels et scolaires rÃ©alisÃ©s au cours de ma formation BTS SIO.</p>
       </div>
       <div class="row g-4">
         <div class="col-lg-6 col-md-6 fu d1">
@@ -1943,12 +1916,12 @@
             </div>
             <div class="pbdy">
               <h4>PingCastle</h4>
-              <p>Projet scolaire réalisé lors de ma deuxième année — audit de sécurité sur l'Active Directory.</p>
+              <p>Projet scolaire rÃ©alisÃ© lors de ma deuxiÃ¨me annÃ©e â€” audit de sÃ©curitÃ© sur l'Active Directory.</p>
               <div class="ptechs"><span class="pt">Windows Server</span><span class="pt">Active Directory</span><span
                   class="pt">Audit</span></div>
               <div class="pbtns"><a href="pdfs/E6_ProjetPingCastle_2026.pdf" class="pb pbm"><i
                     class="fa fa-eye"></i>Voir FicheE6</a><a href="pdfs/PROCEDURE DE DURCISSEMENt.pdf" target="_blank"
-                  download class="pb pbs"><i class="fa fa-file-pdf"></i>PDF_Procédure</a></div>
+                  download class="pb pbs"><i class="fa fa-file-pdf"></i>PDF_ProcÃ©dure</a></div>
             </div>
           </div>
         </div>
@@ -1962,14 +1935,14 @@
                 class="pbdg bps">Professionnel</span>
             </div>
             <div class="pbdy">
-              <h4>Déploiement Centreon</h4>
-              <p>Dans le cadre d'un contract client au seins de mon alternance nous avons du déployer l'outil de supervision Centreon.</p>
-              <div class="ptechs"><span class="pt">Supervision</span><span class="pt">Réseau</span><span
+              <h4>DÃ©ploiement Centreon</h4>
+              <p>Dans le cadre d'un contract client au seins de mon alternance nous avons du dÃ©ployer l'outil de supervision Centreon.</p>
+              <div class="ptechs"><span class="pt">Supervision</span><span class="pt">RÃ©seau</span><span
                   class="pt">Surveillance</span></div>
               <div class="pbtns"><a href="projets/projet2.html" class="pb pbm"><i 
                     class="fa fa-eye"></i>Voir FicheE6</a><a
                   href="pdfs/Fiche projet Portfolio.pdf" target="_blank" download class="pb pbs"><i
-                    class="fa fa-file-pdf"></i>PDF_Procédure</a></div>
+                    class="fa fa-file-pdf"></i>PDF_ProcÃ©dure</a></div>
             </div>
           </div>
         </div>
@@ -1983,12 +1956,12 @@
             </div>
             <div class="pbdy">
               <h4>GLPI + OCS</h4>
-              <p>Installation de GLPI et OCS liés au seins de mon lab.</p>
+              <p>Installation de GLPI et OCS liÃ©s au seins de mon lab.</p>
               <div class="ptechs"><span class="pt">GLPI</span><span class="pt">OCS</span><span
                   class="pt">Inventaire</span></div>
               <div class="pbtns"><a href="projets/projet3.html" class="pb pbm"><i class="fa fa-eye"></i>Voir FicheE6</a><a
-                  href="pdfs/Tableau de Synthèse BTS SIO 2.pdf" target="_blank" download class="pb pbs"><i
-                    class="fa fa-file-pdf"></i>PDF_Procédure</a></div>
+                  href="pdfs/Tableau de SynthÃ¨se BTS SIO 2.pdf" target="_blank" download class="pb pbs"><i
+                    class="fa fa-file-pdf"></i>PDF_ProcÃ©dure</a></div>
             </div>
           </div>
         </div>
@@ -2003,9 +1976,9 @@
             <div class="pbdy">
               <h4>Installation pare-feu et PC</h4>
               <p>Configuration et installation d'un pare-feu Stormshield neuf pour connecter un site distant + imprimante et PC'S
-              <div class="ptechs"><span class="pt">Stormshield</span><span class="pt">Règles</span></div>
+              <div class="ptechs"><span class="pt">Stormshield</span><span class="pt">RÃ¨gles</span></div>
               <div class="pbtns"><a href="projets/projet4.html" class="pb pbm"><i class="fa fa-eye"></i>Voir FicheE6</a><a
-                  href="pdfs/projet4.pdf" target="_blank" download class="pb pbs"><i class="fa fa-file-pdf"></i>PDF_Procédure</a>
+                  href="pdfs/projet4.pdf" target="_blank" download class="pb pbs"><i class="fa fa-file-pdf"></i>PDF_ProcÃ©dure</a>
               </div>
             </div>
           </div>
@@ -2014,38 +1987,36 @@
     </div>
   </section>
 
-  <!-- VEILLE RSS CERT-FR -->
+  <!-- VEILLE RSS -->
   <section id="veille" class="sec sec-dark">
     <div class="container">
-      <div class="row align-items-end mb-3 fu">
+      <div class="row align-items-end mb-4 fu">
         <div class="col-lg-7">
           <span class="slb">Veille technologique</span>
-          <h2 class="sti">Alertes de sécurité en direct</h2>
+          <h2 class="sti">ActualitÃ©s &amp; Alertes de sÃ©curitÃ©</h2>
           <div class="sbar"></div>
-          <p class="ssub">Flux RSS automatique du <strong>CERT-FR (ANSSI)</strong> — dernières vulnérabilités et avis de
-            sécurité officiels, mis à jour en temps réel.</p>
+          <p class="ssub">Flux RSS automatiques â€” derniÃ¨res actualitÃ©s informatiques et alertes de sÃ©curitÃ© officielles, mis Ã  jour en temps rÃ©el.</p>
         </div>
         <div class="col-lg-5 mt-3 mt-lg-0">
-          <div class="vstatus"><span class="vsdot ld" id="vdot"></span><span id="vtxt">Chargement du flux
-              CERT-FR…</span></div>
+          <div class="vstatus">
+            <span class="vsdot ld" id="vdot"></span>
+            <span id="vtxt">Chargement des flux RSSâ€¦</span>
+          </div>
           <div class="vtabs">
-            <button class="vtab on" onclick="fv(this,'all')">Alertes</button>
+            <button class="vtab on"  onclick="fv(this,'all')">Tout</button>
+            <button class="vtab"     onclick="fv(this,'certfr')">CERT-FR</button>
+            <button class="vtab"     onclick="fv(this,'itco')">IT-Connect</button>
+            <button class="vtab"     onclick="fv(this,'silicon')">Silicon</button>
+            <button class="vtab"     onclick="fv(this,'01net')">01Net</button>
           </div>
         </div>
       </div>
-      <div id="vload" class="fu d1"><i class="fa fa-circle-notch"></i>
-        <p>Récupération des alertes de sécurité…</p>
+      <div id="vload" class="fu d1">
+        <i class="fa fa-circle-notch"></i>
+        <p>RÃ©cupÃ©ration des articles en coursâ€¦</p>
       </div>
-      <div id="verr"><i class="fa fa-triangle-exclamation"
-          style="font-size:2rem;color:#ef4444;display:block;margin-bottom:10px"></i>
-        <p>Impossible de charger le flux RSS. <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank"
-            style="color:var(--pu)">Consulter directement le CERT-FR →</a></p>
-      </div>
+      <div id="verr"></div>
       <div class="vgrid fu d2" id="vgrid" style="display:none;"></div>
-      <div class="text-center mt-4 fu d3">
-        <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" class="bp" style="display:inline-flex;"><i
-            class="fa fa-arrow-up-right-from-square"></i>Toutes les alertes CERT-FR</a>
-      </div>
     </div>
   </section>
 
@@ -2061,11 +2032,11 @@
           <div class="col-lg-4">
             <div class="cpl">
               <h3>Restons en contact</h3>
-              <p class="sub">Je m'engage à vous répondre dans les 48h suivant la réception de votre message.</p>
+              <p class="sub">Je m'engage Ã  vous rÃ©pondre dans les 48h suivant la rÃ©ception de votre message.</p>
               <div class="cdet">
                 <div class="cdico"><i class="fa fa-phone"></i></div>
                 <div>
-                  <div class="lb">Téléphone</div>
+                  <div class="lb">TÃ©lÃ©phone</div>
                   <div class="vl">+33 7 81 50 79 21</div>
                 </div>
               </div>
@@ -2073,14 +2044,14 @@
                 <div class="cdico"><i class="fa fa-map-marker-alt"></i></div>
                 <div>
                   <div class="lb">Localisation</div>
-                  <div class="vl">Chambéry / Albertville (73)</div>
+                  <div class="vl">ChambÃ©ry / Albertville (73)</div>
                 </div>
               </div>
               <div class="cdet">
                 <div class="cdico"><i class="fa fa-building"></i></div>
                 <div>
-                  <div class="lb">École</div>
-                  <div class="vl">ECORIS Chambéry</div>
+                  <div class="lb">Ã‰cole</div>
+                  <div class="vl">ECORIS ChambÃ©ry</div>
                 </div>
               </div>
               <div class="csoc">
@@ -2095,7 +2066,7 @@
           <div class="col-lg-8">
             <div class="cpr">
               <h3>Envoyer un message</h3>
-              <p class="sub">Remplissez le formulaire ci-dessous, je vous répondrai rapidement.</p>
+              <p class="sub">Remplissez le formulaire ci-dessous, je vous rÃ©pondrai rapidement.</p>
               <form action="https://formspree.io/f/mjknokkg" method="POST">
                 <div class="row g-3 mb-3">
                   <div class="col-sm-6"><label class="flb">Nom</label><input type="text" name="name" class="fin"
@@ -2106,7 +2077,7 @@
                 <div class="mb-3"><label class="flb">Sujet</label><input type="text" name="subject" class="fin"
                     placeholder="Objet de votre message"></div>
                 <div class="mb-3"><label class="flb">Message</label><textarea name="message" class="fin"
-                    placeholder="Votre message pour Jolan…" required></textarea></div>
+                    placeholder="Votre message pour Jolanâ€¦" required></textarea></div>
                 <button type="submit" class="bsnd"><i class="fa fa-paper-plane"></i>Envoyer le message</button>
               </form>
             </div>
@@ -2122,17 +2093,17 @@
       <div class="row g-4">
         <div class="col-lg-4 col-md-6">
           <div class="ftl"><span>BOCH</span> Jolan</div>
-          <p style="font-size:.85rem;line-height:1.75;max-width:270px;color:var(--txm)">Étudiant BTS SIO SISR passionné
-            par les réseaux, les systèmes et la cybersécurité.</p>
+          <p style="font-size:.85rem;line-height:1.75;max-width:270px;color:var(--txm)">Ã‰tudiant BTS SIO SISR passionnÃ©
+            par les rÃ©seaux, les systÃ¨mes et la cybersÃ©curitÃ©.</p>
         </div>
         <div class="col-lg-2 col-md-3 col-6">
           <h5>Navigation</h5>
           <ul class="ftlks">
             <li><a href="#hero">Accueil</a></li>
             <li><a href="#parcours">Parcours</a></li>
-            <li><a href="#ecole">École</a></li>
+            <li><a href="#ecole">Ã‰cole</a></li>
             <li><a href="#entreprise">Entreprise</a></li>
-            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#competences">CompÃ©tences</a></li>
             <li><a href="#veille">Veille</a></li>
             <li><a href="#projets">Projets</a></li>
           </ul>
@@ -2142,7 +2113,7 @@
           <ul class="ftlks">
             <li><a href="projets/projet1.html">Projet pro</a></li>
             <li><a href="projets/projet2.html">Portfolio</a></li>
-            <li><a href="projets/projet3.html">Tableau synthèse</a></li>
+            <li><a href="projets/projet3.html">Tableau synthÃ¨se</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6">
@@ -2161,8 +2132,8 @@
       </div>
       <div class="fthr"></div>
       <div class="ftbot">
-        <p>&copy; 2025 <span class="ac">BOCH Jolan</span> — Portfolio BTS SIO SISR</p>
-        <p>Fait avec <span class="ac">♥</span> à Chambéry</p>
+        <p>&copy; 2025 <span class="ac">BOCH Jolan</span> â€” Portfolio BTS SIO SISR</p>
+        <p>Fait avec <span class="ac">â™¥</span> Ã  ChambÃ©ry</p>
       </div>
     </div>
   </footer>
@@ -2184,82 +2155,162 @@
     const secs = document.querySelectorAll('section[id]'), nls = document.querySelectorAll('.nl');
     window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 130) c = s.id }); nls.forEach(l => l.classList.toggle('ac', l.getAttribute('href') === '#' + c)) });
 
-    /* ═══════════════════════════════════════════════════
-       RSS CERT-FR — Via allorigins.win (JSON mode)
-    ═══════════════════════════════════════════════════ */
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       VEILLE RSS â€” 5 sources, double proxy, fiable
+       Sources : CERT-FR Â· IT-Connect Â· Silicon Â· 01Net Â· CERT-FR Alertes
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
     const FEEDS = [
-      { key: 'certfr', name: 'CERT-FR Avis', url: 'https://www.cert.ssi.gouv.fr/feed/', cls: 'sc-certfr' },
-      { key: 'alerte', name: 'CERT-FR Alertes', url: 'https://www.cert.ssi.gouv.fr/alerte/feed/', cls: 'sc-anssi' }
+      {
+        key: 'certfr',
+        name: 'CERT-FR',
+        url: 'https://www.cert.ssi.gouv.fr/feed/',
+        cls: 'sc-certfr'
+      },
+      {
+        key: 'certfr',
+        name: 'CERT-FR',
+        url: 'https://www.cert.ssi.gouv.fr/alerte/feed/',
+        cls: 'sc-alerte'
+      },
+      {
+        key: 'itco',
+        name: 'IT-Connect',
+        url: 'https://www.it-connect.fr/feed/',
+        cls: 'sc-itco'
+      },
+      {
+        key: 'silicon',
+        name: 'Silicon',
+        url: 'https://www.silicon.fr/feed/',
+        cls: 'sc-silicon'
+      },
+      {
+        key: '01net',
+        name: '01Net',
+        url: 'https://www.01net.com/feed/',
+        cls: 'sc-01net'
+      }
     ];
+
     let ALL = [], CUR = 'all';
 
-    async function fetchFeed(feed) {
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}&callback=?`;
+    /* â”€â”€ Parse un XML RSS en tableau d'items â”€â”€ */
+    function parseXML(xml, feed) {
       try {
-        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`);
-        const json = await res.json();
-        const xml = json.contents;
-        if (!xml) return [];
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(xml, 'text/xml');
-        const items = Array.from(doc.querySelectorAll('item'));
-
-        return items.map(item => {
-          // <link> en RSS est un nœud texte après le tag, pas un attribut
+        const doc = new DOMParser().parseFromString(xml, 'text/xml');
+        if (doc.querySelector('parsererror')) return [];
+        return Array.from(doc.querySelectorAll('item')).slice(0, 8).map(item => {
+          /* Le tag <link> en RSS est dÃ©licat : son contenu est un nÅ“ud texte
+             qui suit le tag, pas un enfant direct en XML strict */
           let link = '#';
-          const linkNode = item.querySelector('link');
-          if (linkNode) {
-            link = linkNode.textContent.trim() ||
-              linkNode.nextSibling?.textContent?.trim() || '#';
+          const linkEl = item.querySelector('link');
+          if (linkEl) {
+            link = (linkEl.textContent || '').trim();
+            if (!link) {
+              // Cherche le nÅ“ud texte suivant (cas Atom/RSS mixte)
+              let node = linkEl.nextSibling;
+              while (node) {
+                if (node.nodeType === 3 && node.textContent.trim().startsWith('http')) {
+                  link = node.textContent.trim();
+                  break;
+                }
+                node = node.nextSibling;
+              }
+            }
           }
           return {
-            title: item.querySelector('title')?.textContent?.trim() || 'Sans titre',
+            title: (item.querySelector('title')?.textContent || 'Sans titre').trim(),
             link,
-            desc: item.querySelector('description')?.textContent?.trim() || '',
-            date: item.querySelector('pubDate')?.textContent?.trim() || '',
-            sk: feed.key,
-            sn: feed.name,
-            sc: feed.cls
+            desc:  (item.querySelector('description')?.textContent || '').trim(),
+            date:  (item.querySelector('pubDate')?.textContent || '').trim(),
+            sk:    feed.key,
+            sn:    feed.name,
+            sc:    feed.cls
           };
         });
-      } catch (e) {
-        console.warn('Erreur flux', feed.name, e);
-        return [];
-      }
+      } catch { return []; }
     }
 
+    /* â”€â”€ Fetch un feed via rss2json (primaire) puis allorigins (fallback) â”€â”€ */
+    async function fetchFeed(feed) {
+      // Proxy 1 : rss2json (renvoie du JSON propre, pas de parsing XML)
+      try {
+        const r = await fetch(
+          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}&count=8`,
+          { signal: AbortSignal.timeout(7000) }
+        );
+        if (r.ok) {
+          const d = await r.json();
+          if (d.status === 'ok' && d.items?.length) {
+            return d.items.map(i => ({
+              title: i.title || 'Sans titre',
+              link:  i.link  || '#',
+              desc:  i.description || '',
+              date:  i.pubDate || '',
+              sk:    feed.key,
+              sn:    feed.name,
+              sc:    feed.cls
+            }));
+          }
+        }
+      } catch { /* on tente le fallback */ }
+
+      // Proxy 2 : allorigins (raw XML)
+      try {
+        const r = await fetch(
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(feed.url)}`,
+          { signal: AbortSignal.timeout(7000) }
+        );
+        if (r.ok) {
+          const xml = await r.text();
+          if (xml.includes('<item>')) return parseXML(xml, feed);
+        }
+      } catch { /* les deux ont Ã©chouÃ© */ }
+
+      return [];
+    }
+
+    /* â”€â”€ Formatage date â”€â”€ */
     function fmtDate(s) {
       if (!s) return '';
-      try { return new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }); }
-      catch { return s; }
+      try {
+        return new Date(s).toLocaleDateString('fr-FR', {
+          day: '2-digit', month: 'short', year: 'numeric'
+        });
+      } catch { return s; }
     }
 
+    /* â”€â”€ Tronquer texte â”€â”€ */
     function trunc(s, n = 130) {
       if (!s) return '';
-      const clean = s.replace(/<[^>]+>/g, '').replace(/&[a-z#0-9]+;/gi, ' ').trim();
-      return clean.length > n ? clean.slice(0, n) + '…' : clean;
+      const clean = s.replace(/<[^>]+>/g, '').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+      return clean.length > n ? clean.slice(0, n) + 'â€¦' : clean;
     }
 
+    /* â”€â”€ Rendu des cards â”€â”€ */
     function render(items) {
       const g = document.getElementById('vgrid');
       const list = CUR === 'all' ? items : items.filter(i => i.sk === CUR);
       if (!list.length) {
-        g.innerHTML = '<p style="color:var(--txm);text-align:center;padding:30px 0;grid-column:1/-1">Aucune alerte pour ce filtre.</p>';
+        g.innerHTML = '<p style="color:var(--txm);text-align:center;padding:40px 0;grid-column:1/-1">Aucun article pour ce filtre.</p>';
         return;
       }
       g.innerHTML = list.map(i => `
-    <div class="acard">
-      <div class="ahead">
-        <span class="sbadge ${i.sc}">${i.sn}</span>
-        <span class="adate">${fmtDate(i.date)}</span>
-      </div>
-      <h4>${i.title}</h4>
-      <p>${trunc(i.desc)}</p>
-      <a href="${i.link}" target="_blank" rel="noopener" class="alink">Voir l'alerte <i class="fa fa-arrow-right"></i></a>
-    </div>`).join('');
+        <div class="acard">
+          <div class="ahead">
+            <span class="sbadge ${i.sc}">${i.sn}</span>
+            <span class="adate">${fmtDate(i.date)}</span>
+          </div>
+          <h4>${i.title}</h4>
+          <p>${trunc(i.desc)}</p>
+          <a href="${i.link}" target="_blank" rel="noopener" class="alink">
+            Voir plus <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>`).join('');
     }
 
+    /* â”€â”€ Filtre par onglet â”€â”€ */
     function fv(btn, key) {
       document.querySelectorAll('.vtab').forEach(b => b.classList.remove('on'));
       btn.classList.add('on');
@@ -2267,23 +2318,32 @@
       render(ALL);
     }
 
+    /* â”€â”€ Chargement principal â”€â”€ */
     async function loadRSS() {
-      const dot = document.getElementById('vdot');
-      const txt = document.getElementById('vtxt');
+      const dot  = document.getElementById('vdot');
+      const txt  = document.getElementById('vtxt');
       const grid = document.getElementById('vgrid');
-      const ld = document.getElementById('vload');
-      const err = document.getElementById('verr');
+      const ld   = document.getElementById('vload');
+      const err  = document.getElementById('verr');
 
       try {
-        const results = await Promise.all(FEEDS.map(fetchFeed));
-        ALL = results.flat().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 20);
+        // Lance tous les feeds en parallÃ¨le â€” si l'un Ã©choue, les autres continuent
+        const results = await Promise.allSettled(FEEDS.map(fetchFeed));
+        const items = results
+          .filter(r => r.status === 'fulfilled')
+          .flatMap(r => r.value);
+
+        ALL = items
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 20);
 
         ld.style.display = 'none';
 
-        if (!ALL.length) throw new Error('Aucune alerte');
+        if (!ALL.length) throw new Error('Aucun article rÃ©cupÃ©rÃ©');
 
+        const sourcesOK = results.filter(r => r.status === 'fulfilled' && r.value.length).length;
         dot.className = 'vsdot';
-        txt.textContent = `${ALL.length} alertes · mis à jour à ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+        txt.textContent = `${ALL.length} articles Â· ${sourcesOK}/${FEEDS.length} sources Â· ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
         grid.style.display = 'grid';
         render(ALL);
 
@@ -2291,13 +2351,13 @@
         ld.style.display = 'none';
         err.style.display = 'block';
         err.innerHTML = `
-      <i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:10px"></i>
-      <p style="margin-bottom:12px">Impossible de charger le flux RSS.</p>
-      <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">
-        Consulter directement le CERT-FR →
-      </a>`;
+          <i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:12px"></i>
+          <p style="margin-bottom:14px;color:var(--txm)">Impossible de charger les flux RSS.</p>
+          <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">
+            Consulter directement le CERT-FR â†’
+          </a>`;
         dot.className = 'vsdot er';
-        txt.textContent = 'Flux indisponible';
+        txt.textContent = 'Flux indisponibles';
       }
     }
 
