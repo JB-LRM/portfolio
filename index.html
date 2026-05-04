@@ -2156,117 +2156,112 @@
     window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 130) c = s.id }); nls.forEach(l => l.classList.toggle('ac', l.getAttribute('href') === '#' + c)) });
 
     /* ═══════════════════════════════════════════════════════════
-       VEILLE RSS — 5 sources, double proxy, fiable
-       Sources : CERT-FR · IT-Connect · Silicon · 01Net · CERT-FR Alertes
+       VEILLE RSS — 4 sources × 4 articles = 16 articles
+       Proxies par ordre : rss2json → allorigins JSON → allorigins raw
     ═══════════════════════════════════════════════════════════ */
 
     const FEEDS = [
-      {
-        key: 'certfr',
-        name: 'CERT-FR',
-        url: 'https://www.cert.ssi.gouv.fr/feed/',
-        cls: 'sc-certfr'
-      },
-      {
-        key: 'certfr',
-        name: 'CERT-FR',
-        url: 'https://www.cert.ssi.gouv.fr/alerte/feed/',
-        cls: 'sc-alerte'
-      },
-      {
-        key: 'itco',
-        name: 'IT-Connect',
-        url: 'https://www.it-connect.fr/feed/',
-        cls: 'sc-itco'
-      },
-      {
-        key: 'silicon',
-        name: 'Silicon',
-        url: 'https://www.silicon.fr/feed/',
-        cls: 'sc-silicon'
-      },
-      {
-        key: '01net',
-        name: '01Net',
-        url: 'https://www.01net.com/feed/',
-        cls: 'sc-01net'
-      }
+      { key: 'certfr',  name: 'CERT-FR',    url: 'https://www.cert.ssi.gouv.fr/feed/',  cls: 'sc-certfr'  },
+      { key: 'itco',    name: 'IT-Connect', url: 'https://www.it-connect.fr/feed/',      cls: 'sc-itco'    },
+      { key: 'silicon', name: 'Silicon',    url: 'https://www.silicon.fr/feed/',         cls: 'sc-silicon' },
+      { key: '01net',   name: '01Net',      url: 'https://www.01net.com/feed/',          cls: 'sc-01net'   }
     ];
 
     let ALL = [], CUR = 'all';
 
-    /* ── Parse un XML RSS en tableau d'items ── */
+    /* ── Parse XML RSS → 4 items max ── */
     function parseXML(xml, feed) {
       try {
         const doc = new DOMParser().parseFromString(xml, 'text/xml');
         if (doc.querySelector('parsererror')) return [];
-        return Array.from(doc.querySelectorAll('item')).slice(0, 8).map(item => {
-          /* Le tag <link> en RSS est délicat : son contenu est un nœud texte
-             qui suit le tag, pas un enfant direct en XML strict */
+
+        return Array.from(doc.querySelectorAll('item')).slice(0, 4).map(item => {
+
+          /* Récupération du lien — 3 stratégies */
           let link = '#';
           const linkEl = item.querySelector('link');
-          if (linkEl) {
-            link = (linkEl.textContent || '').trim();
-            if (!link) {
-              // Cherche le nœud texte suivant (cas Atom/RSS mixte)
-              let node = linkEl.nextSibling;
-              while (node) {
-                if (node.nodeType === 3 && node.textContent.trim().startsWith('http')) {
-                  link = node.textContent.trim();
-                  break;
-                }
-                node = node.nextSibling;
+          if (linkEl?.textContent?.trim()) {
+            link = linkEl.textContent.trim();
+          }
+          if (link === '#' && linkEl) {
+            // RSS quirk : le texte du lien est parfois dans un nœud texte suivant
+            let node = linkEl.nextSibling;
+            while (node) {
+              if (node.nodeType === 3 && node.textContent.trim().startsWith('http')) {
+                link = node.textContent.trim(); break;
               }
+              node = node.nextSibling;
             }
           }
+          if (link === '#') {
+            // Fallback sur <guid>
+            const guid = item.querySelector('guid')?.textContent?.trim();
+            if (guid?.startsWith('http')) link = guid;
+          }
+
           return {
-            title: (item.querySelector('title')?.textContent || 'Sans titre').trim(),
+            title: item.querySelector('title')?.textContent?.trim() || 'Sans titre',
             link,
-            desc:  (item.querySelector('description')?.textContent || '').trim(),
-            date:  (item.querySelector('pubDate')?.textContent || '').trim(),
-            sk:    feed.key,
-            sn:    feed.name,
-            sc:    feed.cls
+            desc:  item.querySelector('description')?.textContent?.trim() || '',
+            date:  item.querySelector('pubDate')?.textContent?.trim() || '',
+            sk: feed.key, sn: feed.name, sc: feed.cls
           };
         });
       } catch { return []; }
     }
 
-    /* ── Fetch un feed via rss2json (primaire) puis allorigins (fallback) ── */
+    /* ── Fetch un feed via 3 proxies en cascade ── */
     async function fetchFeed(feed) {
-      // Proxy 1 : rss2json (renvoie du JSON propre, pas de parsing XML)
+
+      /* Proxy 1 — rss2json (JSON propre, pas de parsing XML) */
       try {
         const r = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}&count=8`,
-          { signal: AbortSignal.timeout(7000) }
+          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}&count=4`,
+          { signal: AbortSignal.timeout(8000) }
         );
         if (r.ok) {
           const d = await r.json();
           if (d.status === 'ok' && d.items?.length) {
-            return d.items.map(i => ({
+            return d.items.slice(0, 4).map(i => ({
               title: i.title || 'Sans titre',
               link:  i.link  || '#',
               desc:  i.description || '',
               date:  i.pubDate || '',
-              sk:    feed.key,
-              sn:    feed.name,
-              sc:    feed.cls
+              sk: feed.key, sn: feed.name, sc: feed.cls
             }));
           }
         }
-      } catch { /* on tente le fallback */ }
+      } catch { /* tentative suivante */ }
 
-      // Proxy 2 : allorigins (raw XML)
+      /* Proxy 2 — allorigins JSON (renvoie {contents: "xml..."}) */
+      try {
+        const r = await fetch(
+          `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`,
+          { signal: AbortSignal.timeout(8000) }
+        );
+        if (r.ok) {
+          const d = await r.json();
+          if (d?.contents?.includes('<item>')) {
+            const items = parseXML(d.contents, feed);
+            if (items.length) return items;
+          }
+        }
+      } catch { /* tentative suivante */ }
+
+      /* Proxy 3 — allorigins raw (XML brut) */
       try {
         const r = await fetch(
           `https://api.allorigins.win/raw?url=${encodeURIComponent(feed.url)}`,
-          { signal: AbortSignal.timeout(7000) }
+          { signal: AbortSignal.timeout(8000) }
         );
         if (r.ok) {
           const xml = await r.text();
-          if (xml.includes('<item>')) return parseXML(xml, feed);
+          if (xml?.includes('<item>')) {
+            const items = parseXML(xml, feed);
+            if (items.length) return items;
+          }
         }
-      } catch { /* les deux ont échoué */ }
+      } catch { /* échec total pour ce feed */ }
 
       return [];
     }
@@ -2318,7 +2313,7 @@
       render(ALL);
     }
 
-    /* ── Chargement principal ── */
+    /* ── Chargement séquentiel (évite le rate-limiting) ── */
     async function loadRSS() {
       const dot  = document.getElementById('vdot');
       const txt  = document.getElementById('vtxt');
@@ -2327,23 +2322,36 @@
       const err  = document.getElementById('verr');
 
       try {
-        // Lance tous les feeds en parallèle — si l'un échoue, les autres continuent
-        const results = await Promise.allSettled(FEEDS.map(fetchFeed));
-        const items = results
-          .filter(r => r.status === 'fulfilled')
-          .flatMap(r => r.value);
+        const allItems = [];
+        let sourcesOK = 0;
 
-        ALL = items
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 20);
+        /* Fetch séquentiel avec 400ms entre chaque feed
+           pour ne pas saturer les proxies */
+        for (const feed of FEEDS) {
+          const items = await fetchFeed(feed);
+          if (items.length) {
+            allItems.push(...items);
+            sourcesOK++;
+          }
+          await new Promise(r => setTimeout(r, 400));
+        }
+
+        /* Trier par date décroissante, garder 4 par source */
+        const bySource = {};
+        for (const item of allItems) {
+          if (!bySource[item.sk]) bySource[item.sk] = [];
+          bySource[item.sk].push(item);
+        }
+        ALL = Object.values(bySource)
+          .flatMap(arr => arr.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4))
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
 
         ld.style.display = 'none';
 
-        if (!ALL.length) throw new Error('Aucun article récupéré');
+        if (!ALL.length) throw new Error('Aucun article');
 
-        const sourcesOK = results.filter(r => r.status === 'fulfilled' && r.value.length).length;
         dot.className = 'vsdot';
-        txt.textContent = `${ALL.length} articles · ${sourcesOK}/${FEEDS.length} sources · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+        txt.textContent = `${ALL.length} articles · ${sourcesOK}/${FEEDS.length} sources actives · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
         grid.style.display = 'grid';
         render(ALL);
 
