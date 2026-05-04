@@ -38,7 +38,9 @@ export default async function handler(req, res) {
 
     // Retourner le XML brut avec les bons headers
     res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Surrogate-Control', 'no-store');
     return res.status(200).send(xml);
 
   } catch (err) {
