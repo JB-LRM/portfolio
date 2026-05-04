@@ -1995,7 +1995,7 @@
           <span class="slb">Veille technologique</span>
           <h2 class="sti">Actualités &amp; Alertes de sécurité</h2>
           <div class="sbar"></div>
-          <p class="ssub">Flux RSS automatiques — dernières actualités informatiques et alertes de sécurité officielles, mis à jour en temps réel.</p>
+          <p class="ssub">Flux RSS automatiques — dernières actualités et alertes de sécurité depuis <strong>CERT-FR</strong>, <strong>IT-Connect</strong> et <strong>Silicon.fr</strong>, mis à jour en temps réel.</p>
         </div>
         <div class="col-lg-5 mt-3 mt-lg-0">
           <div class="vstatus">
@@ -2007,7 +2007,6 @@
             <button class="vtab"     onclick="fv(this,'certfr')">CERT-FR</button>
             <button class="vtab"     onclick="fv(this,'itco')">IT-Connect</button>
             <button class="vtab"     onclick="fv(this,'silicon')">Silicon</button>
-            <button class="vtab"     onclick="fv(this,'01net')">01Net</button>
           </div>
         </div>
       </div>
@@ -2156,35 +2155,29 @@
     window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 130) c = s.id }); nls.forEach(l => l.classList.toggle('ac', l.getAttribute('href') === '#' + c)) });
 
     /* ═══════════════════════════════════════════════════════════
-       VEILLE RSS — 4 sources × 4 articles = 16 articles
-       Proxies par ordre : rss2json → allorigins JSON → allorigins raw
+       VEILLE RSS — 3 sources × 4 articles = 12 articles
+       CERT-FR · IT-Connect · Silicon
+       4 proxies par source + anti-cache garanti
     ═══════════════════════════════════════════════════════════ */
 
     const FEEDS = [
       { key: 'certfr',  name: 'CERT-FR',    url: 'https://www.cert.ssi.gouv.fr/feed/',  cls: 'sc-certfr'  },
       { key: 'itco',    name: 'IT-Connect', url: 'https://www.it-connect.fr/feed/',      cls: 'sc-itco'    },
-      { key: 'silicon', name: 'Silicon',    url: 'https://www.silicon.fr/feed/',         cls: 'sc-silicon' },
-      { key: '01net',   name: '01Net',      url: 'https://www.01net.com/feed/',          cls: 'sc-01net'   }
+      { key: 'silicon', name: 'Silicon',    url: 'https://www.silicon.fr/feed/',         cls: 'sc-silicon' }
     ];
 
     let ALL = [], CUR = 'all';
 
-    /* ── Parse XML RSS → 4 items max ── */
+    /* ── Parse XML RSS → 4 items ── */
     function parseXML(xml, feed) {
       try {
         const doc = new DOMParser().parseFromString(xml, 'text/xml');
         if (doc.querySelector('parsererror')) return [];
-
         return Array.from(doc.querySelectorAll('item')).slice(0, 4).map(item => {
-
-          /* Récupération du lien — 3 stratégies */
           let link = '#';
           const linkEl = item.querySelector('link');
-          if (linkEl?.textContent?.trim()) {
-            link = linkEl.textContent.trim();
-          }
+          if (linkEl?.textContent?.trim()) link = linkEl.textContent.trim();
           if (link === '#' && linkEl) {
-            // RSS quirk : le texte du lien est parfois dans un nœud texte suivant
             let node = linkEl.nextSibling;
             while (node) {
               if (node.nodeType === 3 && node.textContent.trim().startsWith('http')) {
@@ -2194,11 +2187,9 @@
             }
           }
           if (link === '#') {
-            // Fallback sur <guid>
             const guid = item.querySelector('guid')?.textContent?.trim();
             if (guid?.startsWith('http')) link = guid;
           }
-
           return {
             title: item.querySelector('title')?.textContent?.trim() || 'Sans titre',
             link,
@@ -2210,14 +2201,21 @@
       } catch { return []; }
     }
 
-    /* ── Fetch un feed via 3 proxies en cascade ── */
+    /* ── Fetch un feed via 4 proxies en cascade avec anti-cache ── */
     async function fetchFeed(feed) {
+      const t = Date.now();
+      /* Anti-cache : ajoute ?_=timestamp à l'URL du flux
+         La plupart des serveurs RSS ignorent ce paramètre
+         mais les proxies voient une URL différente à chaque fois */
+      const bustUrl = feed.url + (feed.url.includes('?') ? '&' : '?') + '_=' + t;
+      const enc     = encodeURIComponent(feed.url);
+      const encBust = encodeURIComponent(bustUrl);
 
-      /* Proxy 1 — rss2json (JSON propre, pas de parsing XML) */
+      /* Proxy 1 — rss2json avec URL bustée (évite le cache de rss2json) */
       try {
         const r = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}&count=4`,
-          { signal: AbortSignal.timeout(8000) }
+          `https://api.rss2json.com/v1/api.json?rss_url=${encBust}&count=4`,
+          { signal: AbortSignal.timeout(7000) }
         );
         if (r.ok) {
           const d = await r.json();
@@ -2231,28 +2229,13 @@
             }));
           }
         }
-      } catch { /* tentative suivante */ }
+      } catch { /* proxy suivant */ }
 
-      /* Proxy 2 — allorigins JSON (renvoie {contents: "xml..."}) */
+      /* Proxy 2 — corsproxy.io (souvent débloqué là où les autres échouent) */
       try {
         const r = await fetch(
-          `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`,
-          { signal: AbortSignal.timeout(8000) }
-        );
-        if (r.ok) {
-          const d = await r.json();
-          if (d?.contents?.includes('<item>')) {
-            const items = parseXML(d.contents, feed);
-            if (items.length) return items;
-          }
-        }
-      } catch { /* tentative suivante */ }
-
-      /* Proxy 3 — allorigins raw (XML brut) */
-      try {
-        const r = await fetch(
-          `https://api.allorigins.win/raw?url=${encodeURIComponent(feed.url)}`,
-          { signal: AbortSignal.timeout(8000) }
+          `https://corsproxy.io/?${enc}`,
+          { signal: AbortSignal.timeout(7000) }
         );
         if (r.ok) {
           const xml = await r.text();
@@ -2261,7 +2244,37 @@
             if (items.length) return items;
           }
         }
-      } catch { /* échec total pour ce feed */ }
+      } catch { /* proxy suivant */ }
+
+      /* Proxy 3 — allorigins JSON avec anti-cache */
+      try {
+        const r = await fetch(
+          `https://api.allorigins.win/get?url=${encBust}`,
+          { signal: AbortSignal.timeout(7000) }
+        );
+        if (r.ok) {
+          const d = await r.json();
+          if (d?.contents?.includes('<item>')) {
+            const items = parseXML(d.contents, feed);
+            if (items.length) return items;
+          }
+        }
+      } catch { /* proxy suivant */ }
+
+      /* Proxy 4 — allorigins raw avec anti-cache */
+      try {
+        const r = await fetch(
+          `https://api.allorigins.win/raw?url=${encBust}`,
+          { signal: AbortSignal.timeout(7000) }
+        );
+        if (r.ok) {
+          const xml = await r.text();
+          if (xml?.includes('<item>')) {
+            const items = parseXML(xml, feed);
+            if (items.length) return items;
+          }
+        }
+      } catch { /* tous les proxies ont échoué */ }
 
       return [];
     }
@@ -2313,7 +2326,7 @@
       render(ALL);
     }
 
-    /* ── Chargement séquentiel (évite le rate-limiting) ── */
+    /* ── Chargement en parallèle ── */
     async function loadRSS() {
       const dot  = document.getElementById('vdot');
       const txt  = document.getElementById('vtxt');
@@ -2322,36 +2335,33 @@
       const err  = document.getElementById('verr');
 
       try {
+        /* Fetch en parallèle — plus rapide, et si une source échoue
+           les autres s'affichent quand même */
+        const results = await Promise.allSettled(FEEDS.map(fetchFeed));
+
         const allItems = [];
         let sourcesOK = 0;
 
-        /* Fetch séquentiel avec 400ms entre chaque feed
-           pour ne pas saturer les proxies */
-        for (const feed of FEEDS) {
-          const items = await fetchFeed(feed);
-          if (items.length) {
-            allItems.push(...items);
+        results.forEach((r, i) => {
+          if (r.status === 'fulfilled' && r.value.length) {
+            /* Exactement 4 articles par source, triés par date */
+            const sorted = r.value
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .slice(0, 4);
+            allItems.push(...sorted);
             sourcesOK++;
           }
-          await new Promise(r => setTimeout(r, 400));
-        }
+        });
 
-        /* Trier par date décroissante, garder 4 par source */
-        const bySource = {};
-        for (const item of allItems) {
-          if (!bySource[item.sk]) bySource[item.sk] = [];
-          bySource[item.sk].push(item);
-        }
-        ALL = Object.values(bySource)
-          .flatMap(arr => arr.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4))
-          .sort((a, b) => new Date(b.date) - new Date(a.date));
+        /* Tri global par date décroissante */
+        ALL = allItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         ld.style.display = 'none';
 
         if (!ALL.length) throw new Error('Aucun article');
 
         dot.className = 'vsdot';
-        txt.textContent = `${ALL.length} articles · ${sourcesOK}/${FEEDS.length} sources actives · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+        txt.textContent = `${ALL.length} articles · ${sourcesOK}/${FEEDS.length} sources · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
         grid.style.display = 'grid';
         render(ALL);
 
