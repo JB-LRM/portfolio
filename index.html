@@ -2154,226 +2154,161 @@
     const secs = document.querySelectorAll('section[id]'), nls = document.querySelectorAll('.nl');
     window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 130) c = s.id }); nls.forEach(l => l.classList.toggle('ac', l.getAttribute('href') === '#' + c)) });
 
-    /* ═══════════════════════════════════════════════════════════
-       VEILLE RSS — 3 sources × 4 articles = 12 articles
-       CERT-FR · IT-Connect · Silicon
-       4 proxies par source + anti-cache garanti
-    ═══════════════════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════
+       VEILLE RSS — 3 sources x 4 articles = 12 articles
+       Proxies en PARALLELE (Promise.any) — le plus rapide gagne
+    ═══════════════════════════════════════════════════════ */
 
     const FEEDS = [
-      { key: 'certfr',  name: 'CERT-FR',    url: 'https://www.cert.ssi.gouv.fr/feed/',  cls: 'sc-certfr'  },
-      { key: 'itco',    name: 'IT-Connect', url: 'https://www.it-connect.fr/feed/',      cls: 'sc-itco'    },
-      { key: 'silicon', name: 'Silicon',    url: 'https://www.silicon.fr/feed/',         cls: 'sc-silicon' }
+      { key:'certfr',  name:'CERT-FR',    url:'https://www.cert.ssi.gouv.fr/feed/',  cls:'sc-certfr'  },
+      { key:'itco',    name:'IT-Connect', url:'https://www.it-connect.fr/feed/',      cls:'sc-itco'    },
+      { key:'silicon', name:'Silicon',    url:'https://www.silicon.fr/feed/',         cls:'sc-silicon' }
     ];
-
     let ALL = [], CUR = 'all';
 
-    /* ── Parse XML RSS → 4 items ── */
+    function withTimeout(promise, ms) {
+      return Promise.race([promise, new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('timeout')); }, ms); })]);
+    }
+
     function parseXML(xml, feed) {
       try {
         const doc = new DOMParser().parseFromString(xml, 'text/xml');
         if (doc.querySelector('parsererror')) return [];
-        return Array.from(doc.querySelectorAll('item')).slice(0, 4).map(item => {
+        return Array.from(doc.querySelectorAll('item')).slice(0, 4).map(function(item) {
           let link = '#';
-          const linkEl = item.querySelector('link');
-          if (linkEl?.textContent?.trim()) link = linkEl.textContent.trim();
-          if (link === '#' && linkEl) {
-            let node = linkEl.nextSibling;
-            while (node) {
-              if (node.nodeType === 3 && node.textContent.trim().startsWith('http')) {
-                link = node.textContent.trim(); break;
-              }
-              node = node.nextSibling;
+          const le = item.querySelector('link');
+          if (le && le.textContent.trim()) link = le.textContent.trim();
+          if (link === '#' && le) {
+            let n = le.nextSibling;
+            while (n) {
+              if (n.nodeType === 3 && n.textContent.trim().indexOf('http') === 0) { link = n.textContent.trim(); break; }
+              n = n.nextSibling;
             }
           }
           if (link === '#') {
-            const guid = item.querySelector('guid')?.textContent?.trim();
-            if (guid?.startsWith('http')) link = guid;
+            const g = item.querySelector('guid');
+            if (g && g.textContent.trim().indexOf('http') === 0) link = g.textContent.trim();
           }
           return {
-            title: item.querySelector('title')?.textContent?.trim() || 'Sans titre',
-            link,
-            desc:  item.querySelector('description')?.textContent?.trim() || '',
-            date:  item.querySelector('pubDate')?.textContent?.trim() || '',
+            title : (item.querySelector('title') ? item.querySelector('title').textContent : 'Sans titre').trim(),
+            link  : link,
+            desc  : (item.querySelector('description') ? item.querySelector('description').textContent : '').trim(),
+            date  : (item.querySelector('pubDate') ? item.querySelector('pubDate').textContent : '').trim(),
             sk: feed.key, sn: feed.name, sc: feed.cls
           };
         });
-      } catch { return []; }
+      } catch(e) { return []; }
     }
 
-    /* ── Fetch un feed via 4 proxies en cascade avec anti-cache ── */
-    async function fetchFeed(feed) {
-      const t = Date.now();
-      /* Anti-cache : ajoute ?_=timestamp à l'URL du flux
-         La plupart des serveurs RSS ignorent ce paramètre
-         mais les proxies voient une URL différente à chaque fois */
-      const bustUrl = feed.url + (feed.url.includes('?') ? '&' : '?') + '_=' + t;
-      const enc     = encodeURIComponent(feed.url);
-      const encBust = encodeURIComponent(bustUrl);
-
-      /* Proxy 1 — rss2json avec URL bustée (évite le cache de rss2json) */
-      try {
-        const r = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=${encBust}&count=4`,
-          { signal: AbortSignal.timeout(7000) }
-        );
-        if (r.ok) {
-          const d = await r.json();
-          if (d.status === 'ok' && d.items?.length) {
-            return d.items.slice(0, 4).map(i => ({
-              title: i.title || 'Sans titre',
-              link:  i.link  || '#',
-              desc:  i.description || '',
-              date:  i.pubDate || '',
-              sk: feed.key, sn: feed.name, sc: feed.cls
-            }));
-          }
-        }
-      } catch { /* proxy suivant */ }
-
-      /* Proxy 2 — corsproxy.io (souvent débloqué là où les autres échouent) */
-      try {
-        const r = await fetch(
-          `https://corsproxy.io/?${enc}`,
-          { signal: AbortSignal.timeout(7000) }
-        );
-        if (r.ok) {
-          const xml = await r.text();
-          if (xml?.includes('<item>')) {
-            const items = parseXML(xml, feed);
-            if (items.length) return items;
-          }
-        }
-      } catch { /* proxy suivant */ }
-
-      /* Proxy 3 — allorigins JSON avec anti-cache */
-      try {
-        const r = await fetch(
-          `https://api.allorigins.win/get?url=${encBust}`,
-          { signal: AbortSignal.timeout(7000) }
-        );
-        if (r.ok) {
-          const d = await r.json();
-          if (d?.contents?.includes('<item>')) {
-            const items = parseXML(d.contents, feed);
-            if (items.length) return items;
-          }
-        }
-      } catch { /* proxy suivant */ }
-
-      /* Proxy 4 — allorigins raw avec anti-cache */
-      try {
-        const r = await fetch(
-          `https://api.allorigins.win/raw?url=${encBust}`,
-          { signal: AbortSignal.timeout(7000) }
-        );
-        if (r.ok) {
-          const xml = await r.text();
-          if (xml?.includes('<item>')) {
-            const items = parseXML(xml, feed);
-            if (items.length) return items;
-          }
-        }
-      } catch { /* tous les proxies ont échoué */ }
-
-      return [];
+    function pA(feed, eub) {
+      return withTimeout(fetch('https://api.rss2json.com/v1/api.json?rss_url=' + eub + '&count=4'), 6000)
+        .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+        .then(function(d){
+          if (d.status !== 'ok' || !d.items || !d.items.length) throw 0;
+          return d.items.slice(0,4).map(function(i){ return { title:i.title||'Sans titre', link:i.link||'#', desc:i.description||'', date:i.pubDate||'', sk:feed.key, sn:feed.name, sc:feed.cls }; });
+        });
     }
 
-    /* ── Formatage date ── */
+    function pB(feed, eu) {
+      return withTimeout(fetch('https://corsproxy.io/?' + eu), 6000)
+        .then(function(r){ if (!r.ok) throw 0; return r.text(); })
+        .then(function(xml){
+          if (!xml.includes('<item>')) throw 0;
+          const items = parseXML(xml, feed);
+          if (!items.length) throw 0;
+          return items;
+        });
+    }
+
+    function pC(feed, eub) {
+      return withTimeout(fetch('https://api.allorigins.win/get?url=' + eub), 6000)
+        .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+        .then(function(d){
+          if (!d || !d.contents || !d.contents.includes('<item>')) throw 0;
+          const items = parseXML(d.contents, feed);
+          if (!items.length) throw 0;
+          return items;
+        });
+    }
+
+    function pD(feed, eub) {
+      return withTimeout(fetch('https://api.allorigins.win/raw?url=' + eub), 6000)
+        .then(function(r){ if (!r.ok) throw 0; return r.text(); })
+        .then(function(xml){
+          if (!xml.includes('<item>')) throw 0;
+          const items = parseXML(xml, feed);
+          if (!items.length) throw 0;
+          return items;
+        });
+    }
+
+    function fetchFeed(feed) {
+      const t   = Date.now();
+      const eu  = encodeURIComponent(feed.url);
+      const eub = encodeURIComponent(feed.url + '?_=' + t);
+      return Promise.any([pA(feed,eub), pB(feed,eu), pC(feed,eub), pD(feed,eub)])
+        .catch(function(){ return []; });
+    }
+
     function fmtDate(s) {
       if (!s) return '';
-      try {
-        return new Date(s).toLocaleDateString('fr-FR', {
-          day: '2-digit', month: 'short', year: 'numeric'
-        });
-      } catch { return s; }
+      try { return new Date(s).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' }); }
+      catch(e) { return ''; }
     }
 
-    /* ── Tronquer texte ── */
-    function trunc(s, n = 130) {
+    function trunc(s, n) {
+      n = n || 130;
       if (!s) return '';
-      const clean = s.replace(/<[^>]+>/g, '').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
-      return clean.length > n ? clean.slice(0, n) + '…' : clean;
+      const c = s.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
+      return c.length > n ? c.slice(0,n) + '…' : c;
     }
 
-    /* ── Rendu des cards ── */
     function render(items) {
       const g = document.getElementById('vgrid');
-      const list = CUR === 'all' ? items : items.filter(i => i.sk === CUR);
+      const list = CUR === 'all' ? items : items.filter(function(i){ return i.sk === CUR; });
       if (!list.length) {
         g.innerHTML = '<p style="color:var(--txm);text-align:center;padding:40px 0;grid-column:1/-1">Aucun article pour ce filtre.</p>';
         return;
       }
-      g.innerHTML = list.map(i => `
-        <div class="acard">
-          <div class="ahead">
-            <span class="sbadge ${i.sc}">${i.sn}</span>
-            <span class="adate">${fmtDate(i.date)}</span>
-          </div>
-          <h4>${i.title}</h4>
-          <p>${trunc(i.desc)}</p>
-          <a href="${i.link}" target="_blank" rel="noopener" class="alink">
-            Voir plus <i class="fa fa-arrow-right"></i>
-          </a>
-        </div>`).join('');
+      g.innerHTML = list.map(function(i) {
+        return '<div class="acard"><div class="ahead"><span class="sbadge ' + i.sc + '">' + i.sn + '</span><span class="adate">' + fmtDate(i.date) + '</span></div><h4>' + i.title + '</h4><p>' + trunc(i.desc) + '</p><a href="' + i.link + '" target="_blank" rel="noopener" class="alink">Voir plus <i class="fa fa-arrow-right"></i></a></div>';
+      }).join('');
     }
 
-    /* ── Filtre par onglet ── */
     function fv(btn, key) {
-      document.querySelectorAll('.vtab').forEach(b => b.classList.remove('on'));
+      document.querySelectorAll('.vtab').forEach(function(b){ b.classList.remove('on'); });
       btn.classList.add('on');
       CUR = key;
       render(ALL);
     }
 
-    /* ── Chargement en parallèle ── */
     async function loadRSS() {
       const dot  = document.getElementById('vdot');
       const txt  = document.getElementById('vtxt');
       const grid = document.getElementById('vgrid');
       const ld   = document.getElementById('vload');
       const err  = document.getElementById('verr');
-
       try {
-        /* Fetch en parallèle — plus rapide, et si une source échoue
-           les autres s'affichent quand même */
         const results = await Promise.allSettled(FEEDS.map(fetchFeed));
-
-        const allItems = [];
-        let sourcesOK = 0;
-
-        results.forEach((r, i) => {
-          if (r.status === 'fulfilled' && r.value.length) {
-            /* Exactement 4 articles par source, triés par date */
-            const sorted = r.value
-              .sort((a, b) => new Date(b.date) - new Date(a.date))
-              .slice(0, 4);
-            allItems.push(...sorted);
-            sourcesOK++;
+        const allItems = [], okNames = [];
+        results.forEach(function(r, i) {
+          if (r.status === 'fulfilled' && r.value && r.value.length) {
+            const sorted = r.value.sort(function(a,b){ return new Date(b.date)-new Date(a.date); }).slice(0,4);
+            allItems.push.apply(allItems, sorted);
+            okNames.push(FEEDS[i].name);
           }
         });
-
-        /* Tri global par date décroissante */
-        ALL = allItems.sort((a, b) => new Date(b.date) - new Date(a.date));
-
+        ALL = allItems.sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
         ld.style.display = 'none';
-
-        if (!ALL.length) throw new Error('Aucun article');
-
+        if (!ALL.length) throw new Error('vide');
         dot.className = 'vsdot';
-        txt.textContent = `${ALL.length} articles · ${sourcesOK}/${FEEDS.length} sources · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+        txt.textContent = ALL.length + ' articles · ' + okNames.join(', ') + ' · ' + new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
         grid.style.display = 'grid';
         render(ALL);
-
-      } catch (e) {
+      } catch(e) {
         ld.style.display = 'none';
         err.style.display = 'block';
-        err.innerHTML = `
-          <i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:12px"></i>
-          <p style="margin-bottom:14px;color:var(--txm)">Impossible de charger les flux RSS.</p>
-          <a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">
-            Consulter directement le CERT-FR →
-          </a>`;
+        err.innerHTML = '<i class="fa fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;display:block;margin-bottom:12px"></i><p style="margin-bottom:14px;color:var(--txm)">Impossible de charger les flux RSS.</p><a href="https://www.cert.ssi.gouv.fr/avis/" target="_blank" style="color:var(--pl);font-weight:500">Consulter directement le CERT-FR →</a>';
         dot.className = 'vsdot er';
         txt.textContent = 'Flux indisponibles';
       }
@@ -2381,6 +2316,7 @@
 
     loadRSS();
   </script>
+
 </body>
 
 </html>
